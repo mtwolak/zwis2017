@@ -37,7 +37,9 @@
 
         <activity
             android:name=".maps.MapActivity"
-            android:label="@string/title_activity_area_map"></activity>
+            android:label="@string/title_activity_area_map" />
+        <activity android:name=".localization.SavedLocalizationAdapter" />
+        <activity android:name=".localization.ActivitySavedLocalization"></activity>
     </application>
 
 </manifest>

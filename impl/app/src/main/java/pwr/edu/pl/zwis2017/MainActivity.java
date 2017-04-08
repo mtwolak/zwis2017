@@ -11,7 +11,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import pwr.edu.pl.zwis2017.localization.ActivitySavedLocalization;
 import pwr.edu.pl.zwis2017.localization.Localization;
+import pwr.edu.pl.zwis2017.localization.LocalizationWithSelection;
+import pwr.edu.pl.zwis2017.localization.SavedLocalizationAdapter;
 import pwr.edu.pl.zwis2017.maps.MapActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -48,6 +51,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, MapActivity.class);
                 intent.putExtra("enteredLocalization", getEnteredLocalization().toString());
                 startActivity(intent);
+            }
+        });
+        findViewById(R.id.rememberedLocalizationBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ActivitySavedLocalization.class);
+                startActivity(intent);
+
             }
         });
     }
