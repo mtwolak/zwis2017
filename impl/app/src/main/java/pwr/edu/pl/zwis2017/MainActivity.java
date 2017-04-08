@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                intent.putExtra("enteredLocalization", getEnteredLocalization().toString());
                 startActivity(intent);
             }
         });
