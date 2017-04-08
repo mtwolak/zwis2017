@@ -1,39 +1,36 @@
 package pwr.edu.pl.zwis2017.localization;
 
-import android.app.Activity;
-import android.content.Context;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 import pwr.edu.pl.zwis2017.R;
 
 public class SavedLocalizationAdapter extends ArrayAdapter<String> {
 
-    private Context context;
+    private ActivitySavedLocalization parentActivity;
     private int layoutResourceId;
-    private String[] data;
+    private List<String> data;
 
-    public SavedLocalizationAdapter(Context context, int layoutResourceId, String[] data) {
-        super(context, layoutResourceId, data);
-        this.context = context;
+    public SavedLocalizationAdapter(ActivitySavedLocalization parent, int layoutResourceId, String[] data) {
+        super(parent, layoutResourceId, data);
+        this.parentActivity = parent;
         this.layoutResourceId = layoutResourceId;
-        this.data = data;
+        this.data = new LinkedList(Arrays.asList(data));
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
         View row = convertView;
         LocalizationHolder localizationHolder;
         if (row == null) {
-            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+            LayoutInflater inflater = parentActivity.getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
             localizationHolder = new LocalizationHolder();
             localizationHolder.localization = (TextView) row.findViewById(R.id.rememberedLocalizationTxt);
@@ -42,14 +39,36 @@ public class SavedLocalizationAdapter extends ArrayAdapter<String> {
             localizationHolder = (LocalizationHolder) row.getTag();
         }
 
-        String localization = data[position];
-        localizationHolder.localization.setText(localization);
-
+        addDeleteAction(position, row);
+        setTextInRow(position, localizationHolder);
         return row;
+    }
+
+    private void setTextInRow(int position, LocalizationHolder localizationHolder) {
+        String localization = data.get(position);
+        localizationHolder.localization.setText(localization);
+    }
+
+    private void addDeleteAction(final int position, View row) {
+        Button deleteLocalization = (Button) row.findViewById(R.id.deleteLocalizationBtn);
+        deleteLocalization.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                parentActivity.onItemDeleted(data.get(position));
+            }
+        });
+    }
+
+    public void removeLocalization(String positionToDelete) {
+        data.remove(positionToDelete);
     }
 
     static class LocalizationHolder {
         TextView localization;
     }
 
+    @Override
+    public int getCount() {
+        return data.size();
+    }
 }

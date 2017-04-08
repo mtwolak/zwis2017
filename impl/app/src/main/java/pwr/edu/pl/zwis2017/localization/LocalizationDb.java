@@ -61,4 +61,10 @@ public class LocalizationDb {
         }
     return result;
     }
+
+    public void remove(String positionToRemove) {
+        String selection = RememberedLocalizationDatabase.LOCALIZATION_NAME + " = ?";
+        String[] selectionArgs = {positionToRemove};
+        db.getWritableDatabase().delete(RememberedLocalizationDatabase.TABLE_NAME, selection, selectionArgs);
+    }
 }
