@@ -5,9 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import pwr.edu.pl.zwis2017.db.Database;
 import pwr.edu.pl.zwis2017.db.RememberedLocalizationDatabase;
 
@@ -29,12 +26,21 @@ public class LocalizationDb {
 
     public String getSavedLocalization() {
 
+        Cursor cursor = getSavedLocalizations();
+
+        while (cursor.moveToNext()) {
+            return cursor.getString(1);
+        }
+        return null;
+    }
+
+    private Cursor getSavedLocalizations() {
         String[] projection = {
                 RememberedLocalizationDatabase._ID,
                 RememberedLocalizationDatabase.LOCALIZATION_NAME,
         };
 
-        Cursor cursor = db.getReadableDatabase().query(
+        return db.getReadableDatabase().query(
                 RememberedLocalizationDatabase.TABLE_NAME,
                 projection,
                 null,
@@ -43,10 +49,16 @@ public class LocalizationDb {
                 null,
                 null
         );
+    }
 
-        while (cursor.moveToNext()) {
-            return cursor.getString(1);
+    public String[] getAllLocalizations() {
+        Cursor cursor = getSavedLocalizations();
+        String result[] = new String[cursor.getCount()];
+        for(int i = 0; i < cursor.getCount(); i++)
+        {
+            cursor.moveToNext();
+            result[i] = cursor.getString(1);
         }
-        return null;
+    return result;
     }
 }

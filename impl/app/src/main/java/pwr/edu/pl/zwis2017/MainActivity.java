@@ -13,8 +13,6 @@ import android.widget.Toast;
 
 import pwr.edu.pl.zwis2017.localization.ActivitySavedLocalization;
 import pwr.edu.pl.zwis2017.localization.Localization;
-import pwr.edu.pl.zwis2017.localization.LocalizationWithSelection;
-import pwr.edu.pl.zwis2017.localization.SavedLocalizationAdapter;
 import pwr.edu.pl.zwis2017.maps.MapActivity;
 
 public class MainActivity extends AppCompatActivity {

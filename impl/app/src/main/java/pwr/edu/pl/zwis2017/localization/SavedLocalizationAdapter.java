@@ -15,13 +15,13 @@ import android.widget.TextView;
 
 import pwr.edu.pl.zwis2017.R;
 
-public class SavedLocalizationAdapter extends ArrayAdapter<LocalizationWithSelection> {
+public class SavedLocalizationAdapter extends ArrayAdapter<String> {
 
     private Context context;
     private int layoutResourceId;
-    private LocalizationWithSelection[] data;
+    private String[] data;
 
-    public SavedLocalizationAdapter(Context context, int layoutResourceId, LocalizationWithSelection[] data) {
+    public SavedLocalizationAdapter(Context context, int layoutResourceId, String[] data) {
         super(context, layoutResourceId, data);
         this.context = context;
         this.layoutResourceId = layoutResourceId;
@@ -36,23 +36,20 @@ public class SavedLocalizationAdapter extends ArrayAdapter<LocalizationWithSelec
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
             localizationHolder = new LocalizationHolder();
-            localizationHolder.isSelected = (TextView) row.findViewById(R.id.isActualLocalization);
             localizationHolder.localization = (TextView) row.findViewById(R.id.rememberedLocalizationTxt);
             row.setTag(localizationHolder);
         } else {
             localizationHolder = (LocalizationHolder) row.getTag();
         }
 
-        LocalizationWithSelection localization = data[position];
-        localizationHolder.localization.setText(localization.localization);
-        localizationHolder.isSelected.setText(localization.isSelected);
+        String localization = data[position];
+        localizationHolder.localization.setText(localization);
 
         return row;
     }
 
     static class LocalizationHolder {
         TextView localization;
-        TextView isSelected;
     }
 
 }

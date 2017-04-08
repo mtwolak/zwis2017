@@ -10,18 +10,15 @@ import pwr.edu.pl.zwis2017.R;
 public class ActivitySavedLocalization extends AppCompatActivity {
 
     private ListView listView1;
+    private LocalizationDb localizationDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_localization);
+        localizationDb = new LocalizationDb(this);
 
-        LocalizationWithSelection[] data = new LocalizationWithSelection[]
-                {
-                        new LocalizationWithSelection("a", "b"),
-                        new LocalizationWithSelection("aaaa", "bbb")
-                };
-
+        String[] data = localizationDb.getAllLocalizations();
         SavedLocalizationAdapter adapter = new SavedLocalizationAdapter(this, R.layout.listview_item_row, data);
         listView1 = (ListView) findViewById(R.id.listView1);
         View header = getLayoutInflater().inflate(R.layout.listview_header_row, null);
