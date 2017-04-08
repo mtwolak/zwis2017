@@ -17,6 +17,7 @@ import pwr.edu.pl.zwis2017.R;
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private String enteredLocalization;
     private static final double WROCLAW_LATITUDE = 51.1078852;
     private static final double WROCLAW_LONGITUDE = 17.0385376;
 
@@ -24,7 +25,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle b = getIntent().getExtras();
-        String enteredLocalization = b.getString("enteredLocalization");
+        enteredLocalization = b.getString("enteredLocalization");
         setContentView(R.layout.activity_area_map);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -43,6 +44,17 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.church))
                 .anchor(0.0f, 1.0f) // Anchors the marker on the bottom left
                 .position(new LatLng(WROCLAW_LATITUDE, WROCLAW_LONGITUDE)));
+    }
+
+    public void geocoder()
+    {
+        /*Geocoder geocoder = new Geocoder(<your context>);
+        List<Address> addresses;
+        addresses = geocoder.getFromLocationName(<String address>, 1);
+        if(addresses.size() > 0) {
+            double latitude= addresses.get(0).getLatitude();
+            double longitude= addresses.get(0).getLongitude();
+        }*/
     }
 /*
     @Override
