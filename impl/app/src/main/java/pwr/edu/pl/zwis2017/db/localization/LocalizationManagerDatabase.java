@@ -51,9 +51,17 @@ public class LocalizationManagerDatabase {
 
     public void rememberLocalization(String localization) {
         localizationDb.saveLocalization(localization);
+        setPrimaryLocalizationWithDiscardingOld(localization);
+    }
+
+    private void setPrimaryLocalizationWithDiscardingOld(String localization) {
         if (!isPrimaryLocalizationEmpty()) {
             primaryLocalizationDb.removePrimaryLocalization();
         }
         primaryLocalizationDb.setPrimaryLocalization(localization);
+    }
+
+    public void setPrimaryLocalization(String selectedLocalization) {
+        setPrimaryLocalizationWithDiscardingOld(selectedLocalization);
     }
 }
