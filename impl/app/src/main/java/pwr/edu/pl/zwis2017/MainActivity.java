@@ -11,13 +11,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import pwr.edu.pl.zwis2017.db.localization.primary.PrimaryLocalization;
 import pwr.edu.pl.zwis2017.localization.ActivitySavedLocalization;
-import pwr.edu.pl.zwis2017.localization.Localization;
+import pwr.edu.pl.zwis2017.db.localization.saved.Localization;
 import pwr.edu.pl.zwis2017.maps.MapActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private Localization localization;
+    private PrimaryLocalization primaryLocalization;
     private TextView actualLocalizationLbl;
     private EditText enteredLocalizationEditText;
     private static final String LOCALIZATION_REMEMBERED = "Lokalizacja zapamiętana";
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         enteredLocalizationEditText = (EditText) findViewById(R.id.actualLocalizationTxt);
         actualLocalizationLbl = (TextView) findViewById(R.id.actualLocalizationLbl);
         localization = new Localization(this);
+        primaryLocalization = new PrimaryLocalization(this);
     }
 
     private void setButtonsListeners() {
@@ -85,8 +88,8 @@ public class MainActivity extends AppCompatActivity {
         actualLocalizationLbl.setText(getEnteredLocalization());
     }
 
-    public CharSequence getEnteredLocalization() {
-        return enteredLocalizationEditText.getText();
+    public String getEnteredLocalization() {
+        return primaryLocalization.get();
     }
 
     public String getSavedLocalization() {

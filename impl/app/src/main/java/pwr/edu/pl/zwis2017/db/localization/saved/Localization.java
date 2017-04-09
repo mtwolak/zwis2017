@@ -1,6 +1,8 @@
-package pwr.edu.pl.zwis2017.localization;
+package pwr.edu.pl.zwis2017.db.localization.saved;
 
 import android.content.Context;
+
+import pwr.edu.pl.zwis2017.db.localization.saved.LocalizationDb;
 
 public class Localization {
 

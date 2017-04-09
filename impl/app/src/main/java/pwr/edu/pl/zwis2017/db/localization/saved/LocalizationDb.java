@@ -1,4 +1,4 @@
-package pwr.edu.pl.zwis2017.localization;
+package pwr.edu.pl.zwis2017.db.localization.saved;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import pwr.edu.pl.zwis2017.db.Database;
-import pwr.edu.pl.zwis2017.db.RememberedLocalizationDatabase;
 
 public class LocalizationDb {
 

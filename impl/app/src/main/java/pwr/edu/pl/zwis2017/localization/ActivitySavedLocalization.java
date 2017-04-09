@@ -3,11 +3,11 @@ package pwr.edu.pl.zwis2017.localization;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import pwr.edu.pl.zwis2017.R;
+import pwr.edu.pl.zwis2017.db.localization.saved.LocalizationDb;
 
 public class ActivitySavedLocalization extends AppCompatActivity implements OnLocalizationDeleted {
 
