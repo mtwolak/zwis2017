@@ -11,15 +11,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import pwr.edu.pl.zwis2017.db.localization.primary.PrimaryLocalization;
+import pwr.edu.pl.zwis2017.db.localization.LocalizationManagerDatabase;
 import pwr.edu.pl.zwis2017.localization.ActivitySavedLocalization;
-import pwr.edu.pl.zwis2017.db.localization.saved.Localization;
 import pwr.edu.pl.zwis2017.maps.MapActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Localization localization;
-    private PrimaryLocalization primaryLocalization;
+    private LocalizationManagerDatabase localizationDatabase;
     private TextView actualLocalizationLbl;
     private EditText enteredLocalizationEditText;
     private static final String LOCALIZATION_REMEMBERED = "Lokalizacja zapamiętana";
@@ -30,19 +28,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setVariables();
         setButtonsListeners();
-        setInitView();
+        initView();
     }
 
-    private void setInitView() {
-        actualLocalizationLbl.setText(getSavedLocalization());
-        enteredLocalizationEditText.setText(getSavedLocalization());
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initView();
+    }
+
+    private void initView() {
+        actualLocalizationLbl.setText(getPrimaryLocalization());
+        enteredLocalizationEditText.setText(getPrimaryLocalization());
     }
 
     private void setVariables() {
         enteredLocalizationEditText = (EditText) findViewById(R.id.actualLocalizationTxt);
         actualLocalizationLbl = (TextView) findViewById(R.id.actualLocalizationLbl);
-        localization = new Localization(this);
-        primaryLocalization = new PrimaryLocalization(this);
+        localizationDatabase = new LocalizationManagerDatabase(this);
     }
 
     private void setButtonsListeners() {
@@ -50,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MapActivity.class);
-                intent.putExtra("enteredLocalization", getEnteredLocalization().toString());
+                intent.putExtra("enteredLocalization", getPrimaryLocalization());
                 startActivity(intent);
             }
         });
@@ -83,16 +86,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void rememberLocalization() {
-        localization.remember(getEnteredLocalization());
+        localizationDatabase.rememberLocalization(getEnteredLocalization());
         Toast.makeText(MainActivity.this, LOCALIZATION_REMEMBERED, Toast.LENGTH_LONG).show();
         actualLocalizationLbl.setText(getEnteredLocalization());
     }
 
     public String getEnteredLocalization() {
-        return primaryLocalization.get();
+        return enteredLocalizationEditText.getText().toString();
     }
 
-    public String getSavedLocalization() {
-        return localization.getSavedLocalization();
+    public String getPrimaryLocalization() {
+        return localizationDatabase.getPrimaryLocalization();
     }
+
 }

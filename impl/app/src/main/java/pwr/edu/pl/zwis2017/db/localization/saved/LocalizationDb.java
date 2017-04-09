@@ -23,16 +23,6 @@ public class LocalizationDb {
         writableDatabase.insert(RememberedLocalizationDatabase.TABLE_NAME, null, values);
     }
 
-    public String getSavedLocalization() {
-
-        Cursor cursor = getSavedLocalizations();
-
-        while (cursor.moveToNext()) {
-            return cursor.getString(1);
-        }
-        return null;
-    }
-
     private Cursor getSavedLocalizations() {
         String[] projection = {
                 RememberedLocalizationDatabase._ID,
@@ -53,12 +43,11 @@ public class LocalizationDb {
     public String[] getAllLocalizations() {
         Cursor cursor = getSavedLocalizations();
         String result[] = new String[cursor.getCount()];
-        for(int i = 0; i < cursor.getCount(); i++)
-        {
+        for (int i = 0; i < cursor.getCount(); i++) {
             cursor.moveToNext();
             result[i] = cursor.getString(1);
         }
-    return result;
+        return result;
     }
 
     public void remove(String positionToRemove) {

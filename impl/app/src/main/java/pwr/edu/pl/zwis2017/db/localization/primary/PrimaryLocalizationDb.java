@@ -1,12 +1,14 @@
 package pwr.edu.pl.zwis2017.db.localization.primary;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import pwr.edu.pl.zwis2017.db.Database;
 
 
-class PrimaryLocalizationDb {
+public class PrimaryLocalizationDb {
     private final Database db;
 
     public PrimaryLocalizationDb(Context context) {
@@ -34,5 +36,17 @@ class PrimaryLocalizationDb {
         }
 
         return null;
+    }
+
+    public void setPrimaryLocalization(String primaryLocalizationToSet) {
+        SQLiteDatabase writableDatabase = db.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(PrimaryLocalizationDatabase.PRIMARY_LOCALIZATION_NAME, primaryLocalizationToSet);
+        writableDatabase.insert(PrimaryLocalizationDatabase.TABLE_NAME, null, values);
+    }
+
+    public void removePrimaryLocalization() {
+        db.getWritableDatabase().delete(PrimaryLocalizationDatabase.TABLE_NAME, null, null);
     }
 }

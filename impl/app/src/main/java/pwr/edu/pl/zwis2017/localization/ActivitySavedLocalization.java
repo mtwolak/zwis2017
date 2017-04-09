@@ -7,12 +7,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import pwr.edu.pl.zwis2017.R;
-import pwr.edu.pl.zwis2017.db.localization.saved.LocalizationDb;
+import pwr.edu.pl.zwis2017.db.localization.LocalizationManagerDatabase;
 
 public class ActivitySavedLocalization extends AppCompatActivity implements OnLocalizationDeleted {
 
     private ListView listView1;
-    private LocalizationDb localizationDb;
+    private LocalizationManagerDatabase localizationDatabase;
     private SavedLocalizationAdapter adapter;
     private static final String POSITION_REMOVED = "Usunięto pozycję ";
 
@@ -20,9 +20,9 @@ public class ActivitySavedLocalization extends AppCompatActivity implements OnLo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_localization);
-        localizationDb = new LocalizationDb(this);
+        localizationDatabase = new LocalizationManagerDatabase(this);
 
-        String[] data = localizationDb.getAllLocalizations();
+        String[] data = localizationDatabase.getAllLocalizations();
         adapter = new SavedLocalizationAdapter(this, R.layout.listview_item_row, data);
         listView1 = (ListView) findViewById(R.id.listView1);
         View header = getLayoutInflater().inflate(R.layout.listview_header_row, null);
@@ -32,9 +32,9 @@ public class ActivitySavedLocalization extends AppCompatActivity implements OnLo
 
     @Override
     public void onItemDeleted(String positionToDelete) {
-        Toast.makeText(this, POSITION_REMOVED + positionToDelete, Toast.LENGTH_LONG).show();
-        localizationDb.remove(positionToDelete);
+        localizationDatabase.remove(positionToDelete);
         adapter.removeLocalization(positionToDelete);
         adapter.notifyDataSetChanged();
+        Toast.makeText(this, POSITION_REMOVED + positionToDelete, Toast.LENGTH_LONG).show();
     }
 }
