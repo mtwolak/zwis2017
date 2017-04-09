@@ -1,4 +1,4 @@
-package pwr.edu.pl.zwis2017;
+package pwr.edu.pl.zwis2017.screen.main;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -11,9 +11,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import pwr.edu.pl.zwis2017.R;
 import pwr.edu.pl.zwis2017.db.localization.LocalizationManagerDatabase;
-import pwr.edu.pl.zwis2017.localization.ActivitySavedLocalization;
-import pwr.edu.pl.zwis2017.maps.MapActivity;
+import pwr.edu.pl.zwis2017.screen.localization.ActivitySavedLocalization;
+import pwr.edu.pl.zwis2017.screen.maps.MapActivity;
 
 public class MainActivity extends AppCompatActivity {
 

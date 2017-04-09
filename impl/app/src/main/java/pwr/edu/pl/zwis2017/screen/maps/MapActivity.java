@@ -1,4 +1,4 @@
-package pwr.edu.pl.zwis2017.maps;
+package pwr.edu.pl.zwis2017.screen.maps;
 
 import android.content.Context;
 import android.location.Geocoder;

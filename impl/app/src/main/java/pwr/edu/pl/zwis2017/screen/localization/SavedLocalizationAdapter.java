@@ -1,4 +1,4 @@
-package pwr.edu.pl.zwis2017.localization;
+package pwr.edu.pl.zwis2017.screen.localization;
 
 import android.view.LayoutInflater;
 import android.view.View;

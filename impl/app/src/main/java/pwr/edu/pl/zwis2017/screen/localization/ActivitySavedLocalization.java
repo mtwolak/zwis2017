@@ -1,4 +1,4 @@
-package pwr.edu.pl.zwis2017.localization;
+package pwr.edu.pl.zwis2017.screen.localization;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
