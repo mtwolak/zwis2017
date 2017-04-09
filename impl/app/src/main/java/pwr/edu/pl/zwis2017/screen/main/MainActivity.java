@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView actualLocalizationLbl;
     private EditText enteredLocalizationEditText;
     private static final String LOCALIZATION_REMEMBERED = "Lokalizacja zapamiętana";
+    private static final String LOCALIZATION_CANNOT_BE_REMEMBERED_EXISTS_ALREADY = "Lokalizacja nie może być zapamiętana, ponieważ już istnieje w pamięci";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,9 +88,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void rememberLocalization() {
-        localizationDatabase.rememberLocalization(getEnteredLocalization());
-        Toast.makeText(MainActivity.this, LOCALIZATION_REMEMBERED, Toast.LENGTH_LONG).show();
-        actualLocalizationLbl.setText(getEnteredLocalization());
+        if (localizationDatabase.rememberLocalization(getEnteredLocalization())) {
+            Toast.makeText(MainActivity.this, LOCALIZATION_REMEMBERED, Toast.LENGTH_LONG).show();
+            actualLocalizationLbl.setText(getEnteredLocalization());
+        } else {
+            Toast.makeText(MainActivity.this, LOCALIZATION_CANNOT_BE_REMEMBERED_EXISTS_ALREADY, Toast.LENGTH_LONG).show();
+        }
+
     }
 
     public String getEnteredLocalization() {

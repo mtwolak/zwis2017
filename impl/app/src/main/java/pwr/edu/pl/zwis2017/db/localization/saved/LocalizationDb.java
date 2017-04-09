@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.NonNull;
 
 import pwr.edu.pl.zwis2017.db.Database;
 
@@ -24,20 +25,22 @@ public class LocalizationDb {
     }
 
     private Cursor getSavedLocalizations() {
-        String[] projection = {
-                RememberedLocalizationDatabase._ID,
-                RememberedLocalizationDatabase.LOCALIZATION_NAME,
-        };
-
         return db.getReadableDatabase().query(
                 RememberedLocalizationDatabase.TABLE_NAME,
-                projection,
+                getProjectionForSavedLocalization(),
                 null,
                 null,
                 null,
                 null,
                 null
         );
+    }
+
+    private String[] getProjectionForSavedLocalization() {
+        return new String[]{
+                RememberedLocalizationDatabase._ID,
+                RememberedLocalizationDatabase.LOCALIZATION_NAME,
+        };
     }
 
     public String[] getAllLocalizations() {
@@ -54,5 +57,19 @@ public class LocalizationDb {
         String selection = RememberedLocalizationDatabase.LOCALIZATION_NAME + " = ?";
         String[] selectionArgs = {positionToRemove};
         db.getWritableDatabase().delete(RememberedLocalizationDatabase.TABLE_NAME, selection, selectionArgs);
+    }
+
+    public boolean doesLocalizationExist(String localization) {
+        Cursor cursor = db.getReadableDatabase().query(
+                RememberedLocalizationDatabase.TABLE_NAME,
+                getProjectionForSavedLocalization(),
+                RememberedLocalizationDatabase.LOCALIZATION_NAME + " = ?",
+                new String[] {localization},
+                null,
+                null,
+                null
+        );
+
+        return cursor.getCount() > 0;
     }
 }

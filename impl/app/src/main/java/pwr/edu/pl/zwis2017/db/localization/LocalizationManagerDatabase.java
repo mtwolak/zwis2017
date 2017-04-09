@@ -49,10 +49,15 @@ public class LocalizationManagerDatabase {
         return localization == null ? UNKNOWN_LOCALIZATION : localization;
     }
 
-    public void rememberLocalization(String localization) {
-        localizationDb.saveLocalization(localization);
-        setPrimaryLocalization(localization);
+    public boolean rememberLocalization(String localization) {
+        if (!localizationDb.doesLocalizationExist(localization)) {
+            localizationDb.saveLocalization(localization);
+            setPrimaryLocalization(localization);
+            return true;
+        }
+        return false;
     }
+
 
     public void setPrimaryLocalization(String localization) {
         if (!isPrimaryLocalizationEmpty()) {
