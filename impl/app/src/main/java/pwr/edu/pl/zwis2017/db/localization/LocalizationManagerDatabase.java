@@ -10,6 +10,7 @@ public class LocalizationManagerDatabase {
     private final PrimaryLocalizationDb primaryLocalizationDb;
     private final LocalizationDb localizationDb;
     private static final String UNKNOWN_LOCALIZATION = "Nieznana";
+    private static final LocalizationWithCityNamer LOCALIZATION_WITH_CITY_NAME = new LocalizationWithCityNamer("Wrocław");
 
 
     public LocalizationManagerDatabase(Context context) {
@@ -46,7 +47,7 @@ public class LocalizationManagerDatabase {
 
     public String getPrimaryLocalization() {
         String localization = this.primaryLocalizationDb.getPrimaryLocalization();
-        return localization == null ? UNKNOWN_LOCALIZATION : localization;
+        return localization == null ? UNKNOWN_LOCALIZATION : LOCALIZATION_WITH_CITY_NAME.addCityName(localization);
     }
 
     public boolean rememberLocalization(String localization) {
