@@ -20,7 +20,6 @@ public class LocalizationWithCityNamer {
     {
         this.city = primaryCity;
         this.cityWithoutPolishChars = getCityWithoutPolishChars(primaryCity);
-        System.out.print(true);
     }
 
     public String addCityName(String localization) {
