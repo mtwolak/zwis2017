@@ -5,8 +5,8 @@ import java.util.Map;
 
 public class LocalizationWithCityNamer {
 
-    private final String city;
-    private final String cityWithoutPolishChars;
+    private final String city = "Wrocław";
+    private final String cityWithoutPolishChars = getCityWithoutPolishChars(city);
     private static final Map<Character, Character> POLISH_CHAR_TO_ENGLISH;
 
     static
@@ -14,12 +14,6 @@ public class LocalizationWithCityNamer {
         POLISH_CHAR_TO_ENGLISH = new HashMap<>();
         POLISH_CHAR_TO_ENGLISH.put('ł', 'l');
         POLISH_CHAR_TO_ENGLISH.put('Ł', 'L');
-    }
-
-    public LocalizationWithCityNamer(String primaryCity)
-    {
-        this.city = primaryCity;
-        this.cityWithoutPolishChars = getCityWithoutPolishChars(primaryCity);
     }
 
     public String addCityName(String localization) {

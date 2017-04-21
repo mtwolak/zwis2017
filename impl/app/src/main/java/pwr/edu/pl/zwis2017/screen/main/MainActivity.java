@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import pwr.edu.pl.zwis2017.R;
 import pwr.edu.pl.zwis2017.db.localization.LocalizationManagerDatabase;
+import pwr.edu.pl.zwis2017.db.localization.LocalizationWithCityNamer;
 import pwr.edu.pl.zwis2017.screen.localization.ActivitySavedLocalization;
 import pwr.edu.pl.zwis2017.screen.maps.MapActivity;
 import pwr.edu.pl.zwis2017.screen.region.RegionActivity;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText enteredLocalizationEditText;
     private static final String LOCALIZATION_REMEMBERED = "Lokalizacja zapamiętana";
     private static final String LOCALIZATION_CANNOT_BE_REMEMBERED_EXISTS_ALREADY = "Lokalizacja nie może być zapamiętana, ponieważ już istnieje w pamięci";
+    private static final LocalizationWithCityNamer LOCALIZATION_WITH_CITY_NAMER = new LocalizationWithCityNamer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,9 +99,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void rememberLocalization() {
-        if (localizationDatabase.rememberLocalization(getEnteredLocalization())) {
+        String cityToRemember = LOCALIZATION_WITH_CITY_NAMER.addCityName(getEnteredLocalization());
+        if (localizationDatabase.rememberLocalization(cityToRemember)) {
             Toast.makeText(MainActivity.this, LOCALIZATION_REMEMBERED, Toast.LENGTH_LONG).show();
-            actualLocalizationLbl.setText(getEnteredLocalization());
+            actualLocalizationLbl.setText(cityToRemember);
+            enteredLocalizationEditText.setText(cityToRemember);
         } else {
             Toast.makeText(MainActivity.this, LOCALIZATION_CANNOT_BE_REMEMBERED_EXISTS_ALREADY, Toast.LENGTH_LONG).show();
         }
