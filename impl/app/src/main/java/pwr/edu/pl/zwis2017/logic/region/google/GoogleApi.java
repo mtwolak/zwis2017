@@ -4,7 +4,8 @@ import com.google.maps.GeoApiContext;
 
 public enum GoogleApi {
     GEOCODING("AIzaSyBPk_TevDnbmtzHmekv0ydHB_8E7U7lluI"),
-    ELEVATION("AIzaSyBtkXafXf8vk60nCWCJyzZpt2iQYr-4XJ8");
+    ELEVATION("AIzaSyBtkXafXf8vk60nCWCJyzZpt2iQYr-4XJ8"),
+    PLACES("AIzaSyCKFRhEqIxbcvMYBDbtu0JtR5Y8vVT-u00");
 
     private final String apiKey;
 

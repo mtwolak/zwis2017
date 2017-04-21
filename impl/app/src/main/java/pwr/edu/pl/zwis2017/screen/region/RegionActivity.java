@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import pwr.edu.pl.zwis2017.R;
+import pwr.edu.pl.zwis2017.logic.region.NumberOfPlaces;
 import pwr.edu.pl.zwis2017.logic.region.RegionInformation;
 import pwr.edu.pl.zwis2017.logic.region.RegionInformationable;
 
@@ -19,6 +20,7 @@ public class RegionActivity extends AppCompatActivity {
 
         RegionInformationable regionInformation = getRegionInformation(getActualLocalization());
         double elevation = regionInformation.getElevation();
+        NumberOfPlaces numberOfPlaces = regionInformation.getNumberOfPlaces(1000);
 
     }
 
