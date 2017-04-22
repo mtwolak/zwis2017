@@ -33,7 +33,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         Bundle b = getIntent().getExtras();
         enteredLocalization = b.getString("enteredLocalization");
         setContentView(R.layout.activity_area_map);
-        // Obtain the SupportMapFragment and getPrimaryLocalization notified when the map is ready to be used.
+        // Obtain the SupportMapFragment and getOptionProject notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);

@@ -15,7 +15,7 @@ public class OptionsDb {
         this.db = new Database(context);
     }
 
-    public String getPrimaryLocalization() {
+    public String getOptionProject() {
         String[] projection = {
                 OptionsDatabase.OPTION_NAME,
                 OptionsDatabase.OPTION_VALUE,
@@ -39,15 +39,23 @@ public class OptionsDb {
     }
 
     public void setPrimaryLocalization(String primaryLocalizationToSet) {
+        insertIntoDatabase(OptionsDatabase.PRIMARY_LOCALIZATION_NAME, primaryLocalizationToSet);
+    }
+
+    private void insertIntoDatabase(String optionName, String optionValue) {
         SQLiteDatabase writableDatabase = db.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(OptionsDatabase.OPTION_NAME, OptionsDatabase.PRIMARY_LOCALIZATION_NAME);
-        values.put(OptionsDatabase.OPTION_VALUE, primaryLocalizationToSet);
+        values.put(OptionsDatabase.OPTION_NAME, optionName);
+        values.put(OptionsDatabase.OPTION_VALUE, optionValue);
         writableDatabase.insert(OptionsDatabase.TABLE_NAME, null, values);
     }
 
     public void removePrimaryLocalization() {
-        db.getWritableDatabase().delete(OptionsDatabase.TABLE_NAME, OptionsDatabase.OPTION_NAME + "='" + OptionsDatabase.PRIMARY_LOCALIZATION_NAME+"'", null);
+        removeOption(OptionsDatabase.PRIMARY_LOCALIZATION_NAME);
+    }
+
+    private void removeOption(String optionNameToBeRemoved) {
+        db.getWritableDatabase().delete(OptionsDatabase.TABLE_NAME, OptionsDatabase.OPTION_NAME + "='" + optionNameToBeRemoved+ "'", null);
     }
 }

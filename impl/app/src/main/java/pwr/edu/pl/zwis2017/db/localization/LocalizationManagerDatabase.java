@@ -35,18 +35,18 @@ public class LocalizationManagerDatabase {
     }
 
     private boolean isPrimaryLocalizationEmpty() {
-        return optionsDb.getPrimaryLocalization() == null;
+        return optionsDb.getOptionProject() == null;
     }
 
     private void removeLocalization(String localization) {
-        if (localization.equals(optionsDb.getPrimaryLocalization())) {
+        if (localization.equals(optionsDb.getOptionProject())) {
             optionsDb.removePrimaryLocalization();
         }
         localizationDb.remove(localization);
     }
 
     public String getPrimaryLocalization() {
-        String localization = this.optionsDb.getPrimaryLocalization();
+        String localization = this.optionsDb.getOptionProject();
         return localization == null ? UNKNOWN_LOCALIZATION : localization;
     }
 
