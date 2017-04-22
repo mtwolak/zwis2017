@@ -22,12 +22,12 @@
                 android:text="Promień wyszukiwania obiektów" />
 
             <EditText
-                android:id="@+id/editText4"
+                android:id="@+id/enteredRadius"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:inputType="number"
+                android:text="Number" />
         </TableRow>
 
         <TableRow
@@ -37,7 +37,7 @@
             <ListView
                 android:id="@+id/listView1"
                 android:layout_width="fill_parent"
-                android:layout_height="374dp"
+                android:layout_height="fill_parent"
                 android:layout_weight="1.07" />
         </TableRow>
 

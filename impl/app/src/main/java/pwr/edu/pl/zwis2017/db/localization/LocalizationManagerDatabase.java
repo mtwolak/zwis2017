@@ -2,19 +2,17 @@ package pwr.edu.pl.zwis2017.db.localization;
 
 import android.content.Context;
 
-import pwr.edu.pl.zwis2017.db.localization.primary.OptionsDb;
+import pwr.edu.pl.zwis2017.db.AbstractDatabaseManager;
 import pwr.edu.pl.zwis2017.db.localization.saved.LocalizationDb;
 
-public class LocalizationManagerDatabase {
+public class LocalizationManagerDatabase extends AbstractDatabaseManager {
 
-    private final OptionsDb optionsDb;
     private final LocalizationDb localizationDb;
     private static final String UNKNOWN_LOCALIZATION = "Nieznana";
-    private static final LocalizationWithCityNamer LOCALIZATION_WITH_CITY_NAME = new LocalizationWithCityNamer();
 
 
     public LocalizationManagerDatabase(Context context) {
-        this.optionsDb = new OptionsDb(context);
+        super(context);
         this.localizationDb = new LocalizationDb(context);
     }
 
@@ -35,18 +33,18 @@ public class LocalizationManagerDatabase {
     }
 
     private boolean isPrimaryLocalizationEmpty() {
-        return optionsDb.getOptionProject() == null;
+        return optionsDb.getPrimaryLocalization() == null;
     }
 
     private void removeLocalization(String localization) {
-        if (localization.equals(optionsDb.getOptionProject())) {
+        if (localization.equals(optionsDb.getPrimaryLocalization())) {
             optionsDb.removePrimaryLocalization();
         }
         localizationDb.remove(localization);
     }
 
     public String getPrimaryLocalization() {
-        String localization = this.optionsDb.getOptionProject();
+        String localization = this.optionsDb.getPrimaryLocalization();
         return localization == null ? UNKNOWN_LOCALIZATION : localization;
     }
 

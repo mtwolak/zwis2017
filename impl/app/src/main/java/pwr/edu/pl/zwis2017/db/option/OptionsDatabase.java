@@ -1,4 +1,4 @@
-package pwr.edu.pl.zwis2017.db.localization.primary;
+package pwr.edu.pl.zwis2017.db.option;
 
 
 import android.provider.BaseColumns;

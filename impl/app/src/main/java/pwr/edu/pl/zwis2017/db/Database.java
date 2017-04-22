@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import pwr.edu.pl.zwis2017.db.localization.primary.OptionsDatabase;
+import pwr.edu.pl.zwis2017.db.option.OptionsDatabase;
 import pwr.edu.pl.zwis2017.db.localization.saved.RememberedLocalizationDatabase;
 
 public class Database extends SQLiteOpenHelper {

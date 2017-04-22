@@ -1,4 +1,4 @@
-package pwr.edu.pl.zwis2017.db.localization.primary;
+package pwr.edu.pl.zwis2017.db.option;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -15,7 +15,8 @@ public class OptionsDb {
         this.db = new Database(context);
     }
 
-    public String getOptionProject() {
+    public String getOption(String option)
+    {
         String[] projection = {
                 OptionsDatabase.OPTION_NAME,
                 OptionsDatabase.OPTION_VALUE,
@@ -24,8 +25,8 @@ public class OptionsDb {
         Cursor cursor = db.getReadableDatabase().query(
                 OptionsDatabase.TABLE_NAME,
                 projection,
-                null,
-                null,
+                OptionsDatabase.OPTION_NAME + "=?",
+                new String[] {option},
                 null,
                 null,
                 null
@@ -38,8 +39,17 @@ public class OptionsDb {
         return null;
     }
 
+    public String getPrimaryLocalization() {
+        return getOption(OptionsDatabase.PRIMARY_LOCALIZATION_NAME);
+    }
+
     public void setPrimaryLocalization(String primaryLocalizationToSet) {
         insertIntoDatabase(OptionsDatabase.PRIMARY_LOCALIZATION_NAME, primaryLocalizationToSet);
+    }
+
+    public void setRadius(String radius) {
+        removeOption(OptionsDatabase.RADIUS);
+        insertIntoDatabase(OptionsDatabase.RADIUS, radius);
     }
 
     private void insertIntoDatabase(String optionName, String optionValue) {
@@ -57,5 +67,9 @@ public class OptionsDb {
 
     private void removeOption(String optionNameToBeRemoved) {
         db.getWritableDatabase().delete(OptionsDatabase.TABLE_NAME, OptionsDatabase.OPTION_NAME + "='" + optionNameToBeRemoved+ "'", null);
+    }
+
+    public String getRadius() {
+        return getOption(OptionsDatabase.RADIUS);
     }
 }
