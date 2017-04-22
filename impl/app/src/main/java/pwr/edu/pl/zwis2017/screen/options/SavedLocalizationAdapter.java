@@ -1,4 +1,4 @@
-package pwr.edu.pl.zwis2017.screen.localization;
+package pwr.edu.pl.zwis2017.screen.options;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +14,11 @@ import pwr.edu.pl.zwis2017.R;
 
 public class SavedLocalizationAdapter extends ArrayAdapter<String> {
 
-    private ActivitySavedLocalization parentActivity;
+    private ActivityOptions parentActivity;
     private int layoutResourceId;
     private List<String> data;
 
-    public SavedLocalizationAdapter(ActivitySavedLocalization parent, int layoutResourceId, String[] data) {
+    public SavedLocalizationAdapter(ActivityOptions parent, int layoutResourceId, String[] data) {
         super(parent, layoutResourceId, data);
         this.parentActivity = parent;
         this.layoutResourceId = layoutResourceId;

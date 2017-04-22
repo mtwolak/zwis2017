@@ -1,4 +1,4 @@
-package pwr.edu.pl.zwis2017.screen.localization;
+package pwr.edu.pl.zwis2017.screen.options;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.widget.Toast;
 import pwr.edu.pl.zwis2017.R;
 import pwr.edu.pl.zwis2017.db.localization.LocalizationManagerDatabase;
 
-public class ActivitySavedLocalization extends AppCompatActivity implements OnLocalizationDeleted {
+public class ActivityOptions extends AppCompatActivity implements OnLocalizationDeleted {
 
     private ListView listView1;
     private LocalizationManagerDatabase localizationDatabase;
@@ -46,7 +46,7 @@ public class ActivitySavedLocalization extends AppCompatActivity implements OnLo
 
     private void changeDefaultLocalization(String selectedLocalization) {
         localizationDatabase.setPrimaryLocalization(selectedLocalization);
-        Toast.makeText(ActivitySavedLocalization.this, PRIMARY_LOCALIZATION_CHANGED + selectedLocalization, Toast.LENGTH_SHORT).show();
+        Toast.makeText(ActivityOptions.this, PRIMARY_LOCALIZATION_CHANGED + selectedLocalization, Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -14,7 +14,7 @@ import android.widget.Toast;
 import pwr.edu.pl.zwis2017.R;
 import pwr.edu.pl.zwis2017.db.localization.LocalizationManagerDatabase;
 import pwr.edu.pl.zwis2017.db.localization.LocalizationWithCityNamer;
-import pwr.edu.pl.zwis2017.screen.localization.ActivitySavedLocalization;
+import pwr.edu.pl.zwis2017.screen.options.ActivityOptions;
 import pwr.edu.pl.zwis2017.screen.maps.MapActivity;
 import pwr.edu.pl.zwis2017.screen.region.RegionActivity;
 
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.rememberedLocalizationBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ActivitySavedLocalization.class);
+                Intent intent = new Intent(MainActivity.this, ActivityOptions.class);
                 startActivity(intent);
 
             }
