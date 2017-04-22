@@ -1,4 +1,4 @@
-package pwr.edu.pl.zwis2017.logic.region.google;
+package pwr.edu.pl.zwis2017.screen.region.logic.google;
 
 import com.google.maps.GeoApiContext;
 

@@ -1,4 +1,4 @@
-package pwr.edu.pl.zwis2017.logic.region;
+package pwr.edu.pl.zwis2017.screen.region.logic;
 
 import com.google.maps.ElevationApi;
 import com.google.maps.GeocodingApi;
@@ -9,7 +9,7 @@ import com.google.maps.model.LatLng;
 import com.google.maps.model.PlaceType;
 import com.google.maps.model.PlacesSearchResponse;
 
-import pwr.edu.pl.zwis2017.logic.region.google.GoogleApi;
+import pwr.edu.pl.zwis2017.screen.region.logic.google.GoogleApi;
 
 public class RegionInformation implements RegionInformationable {
 

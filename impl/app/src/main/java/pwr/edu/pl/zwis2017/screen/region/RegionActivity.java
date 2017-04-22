@@ -4,9 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import pwr.edu.pl.zwis2017.R;
-import pwr.edu.pl.zwis2017.logic.region.NumberOfPlaces;
-import pwr.edu.pl.zwis2017.logic.region.RegionInformation;
-import pwr.edu.pl.zwis2017.logic.region.RegionInformationable;
+import pwr.edu.pl.zwis2017.screen.region.logic.NumberOfPlaces;
+import pwr.edu.pl.zwis2017.screen.region.logic.RegionInformation;
+import pwr.edu.pl.zwis2017.screen.region.logic.RegionInformationable;
 
 public class RegionActivity extends AppCompatActivity {
 

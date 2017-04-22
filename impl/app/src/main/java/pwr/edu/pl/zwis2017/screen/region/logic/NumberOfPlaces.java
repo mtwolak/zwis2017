@@ -1,4 +1,4 @@
-package pwr.edu.pl.zwis2017.logic.region;
+package pwr.edu.pl.zwis2017.screen.region.logic;
 
 import java.util.EnumMap;
 import java.util.Map;
