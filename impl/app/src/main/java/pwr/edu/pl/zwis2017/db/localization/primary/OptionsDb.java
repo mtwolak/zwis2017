@@ -8,21 +8,21 @@ import android.database.sqlite.SQLiteDatabase;
 import pwr.edu.pl.zwis2017.db.Database;
 
 
-public class PrimaryLocalizationDb {
+public class OptionsDb {
     private final Database db;
 
-    public PrimaryLocalizationDb(Context context) {
+    public OptionsDb(Context context) {
         this.db = new Database(context);
     }
 
     public String getPrimaryLocalization() {
         String[] projection = {
-                PrimaryLocalizationDatabase._ID,
-                PrimaryLocalizationDatabase.PRIMARY_LOCALIZATION_NAME,
+                OptionsDatabase.OPTION_NAME,
+                OptionsDatabase.OPTION_VALUE,
         };
 
         Cursor cursor = db.getReadableDatabase().query(
-                PrimaryLocalizationDatabase.TABLE_NAME,
+                OptionsDatabase.TABLE_NAME,
                 projection,
                 null,
                 null,
@@ -42,11 +42,12 @@ public class PrimaryLocalizationDb {
         SQLiteDatabase writableDatabase = db.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(PrimaryLocalizationDatabase.PRIMARY_LOCALIZATION_NAME, primaryLocalizationToSet);
-        writableDatabase.insert(PrimaryLocalizationDatabase.TABLE_NAME, null, values);
+        values.put(OptionsDatabase.OPTION_NAME, OptionsDatabase.PRIMARY_LOCALIZATION_NAME);
+        values.put(OptionsDatabase.OPTION_VALUE, primaryLocalizationToSet);
+        writableDatabase.insert(OptionsDatabase.TABLE_NAME, null, values);
     }
 
     public void removePrimaryLocalization() {
-        db.getWritableDatabase().delete(PrimaryLocalizationDatabase.TABLE_NAME, null, null);
+        db.getWritableDatabase().delete(OptionsDatabase.TABLE_NAME, OptionsDatabase.OPTION_NAME + "='" + OptionsDatabase.PRIMARY_LOCALIZATION_NAME+"'", null);
     }
 }

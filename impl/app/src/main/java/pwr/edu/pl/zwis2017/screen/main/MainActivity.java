@@ -14,7 +14,7 @@ import android.widget.Toast;
 import pwr.edu.pl.zwis2017.R;
 import pwr.edu.pl.zwis2017.db.localization.LocalizationManagerDatabase;
 import pwr.edu.pl.zwis2017.db.localization.LocalizationWithCityNamer;
-import pwr.edu.pl.zwis2017.screen.options.ActivityOptions;
+import pwr.edu.pl.zwis2017.screen.options.OptionActivity;
 import pwr.edu.pl.zwis2017.screen.maps.MapActivity;
 import pwr.edu.pl.zwis2017.screen.region.RegionActivity;
 
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.rememberedLocalizationBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ActivityOptions.class);
+                Intent intent = new Intent(MainActivity.this, OptionActivity.class);
                 startActivity(intent);
 
             }
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void rememberLocalization() {
-        String cityToRemember = LOCALIZATION_WITH_CITY_NAMER.addCityName(getEnteredLocalization());
+        String cityToRemember = LOCALIZATION_WITH_CITY_NAMER.addCityName(getEnteredLocalization().trim());
         if (localizationDatabase.rememberLocalization(cityToRemember)) {
             Toast.makeText(MainActivity.this, LOCALIZATION_REMEMBERED, Toast.LENGTH_LONG).show();
             actualLocalizationLbl.setText(cityToRemember);

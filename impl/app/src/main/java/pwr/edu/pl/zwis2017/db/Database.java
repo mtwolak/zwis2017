@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import pwr.edu.pl.zwis2017.db.localization.primary.PrimaryLocalizationDatabase;
+import pwr.edu.pl.zwis2017.db.localization.primary.OptionsDatabase;
 import pwr.edu.pl.zwis2017.db.localization.saved.RememberedLocalizationDatabase;
 
 public class Database extends SQLiteOpenHelper {
@@ -14,21 +14,19 @@ public class Database extends SQLiteOpenHelper {
                     RememberedLocalizationDatabase._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     RememberedLocalizationDatabase.LOCALIZATION_NAME + " TEXT)";
 
-    private static final String SQL_PRIMARY_LOCALIZATION_CREATE =
-            "CREATE TABLE " + PrimaryLocalizationDatabase.TABLE_NAME + " (" +
-                    PrimaryLocalizationDatabase._ID + " INTEGER PRIMARY KEY, " +
-                    PrimaryLocalizationDatabase.PRIMARY_LOCALIZATION_NAME + " TEXT, "
-            + "FOREIGN KEY(" + PrimaryLocalizationDatabase.PRIMARY_LOCALIZATION_NAME + ") REFERENCES " +
-            PrimaryLocalizationDatabase.TABLE_NAME + "(" +RememberedLocalizationDatabase.LOCALIZATION_NAME+ "))";
+    private static final String SQL_OPTIONS_CREATE =
+            "CREATE TABLE " + OptionsDatabase.TABLE_NAME + " (" +
+                    OptionsDatabase.OPTION_NAME + " TEXT PRIMARY KEY, "
+            +       OptionsDatabase.OPTION_VALUE + " TEXT)";
 
     private static final String SQL_DELETE_LOCALIZATION =
             "DROP TABLE IF EXISTS " + RememberedLocalizationDatabase.TABLE_NAME;
     private static final String SQL_DELETE_PRIMARY_LOCALIZATION =
-            "DROP TABLE IF EXISTS " + PrimaryLocalizationDatabase.TABLE_NAME;
+            "DROP TABLE IF EXISTS " + OptionsDatabase.PRIMARY_LOCALIZATION_NAME;
 
 
     private static final String DATABASE_NAME = "ZWIS_DB2017";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     public Database(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -37,7 +35,7 @@ public class Database extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_REMEMBERED_LOCALIZATION_CREATE);
-        db.execSQL(SQL_PRIMARY_LOCALIZATION_CREATE);
+        db.execSQL(SQL_OPTIONS_CREATE);
     }
 
     @Override

@@ -14,11 +14,11 @@ import pwr.edu.pl.zwis2017.R;
 
 public class SavedLocalizationAdapter extends ArrayAdapter<String> {
 
-    private ActivityOptions parentActivity;
+    private OptionActivity parentActivity;
     private int layoutResourceId;
     private List<String> data;
 
-    public SavedLocalizationAdapter(ActivityOptions parent, int layoutResourceId, String[] data) {
+    public SavedLocalizationAdapter(OptionActivity parent, int layoutResourceId, String[] data) {
         super(parent, layoutResourceId, data);
         this.parentActivity = parent;
         this.layoutResourceId = layoutResourceId;

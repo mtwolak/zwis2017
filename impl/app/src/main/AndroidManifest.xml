@@ -39,7 +39,7 @@
             android:name=".screen.maps.MapActivity"
             android:label="@string/title_activity_area_map" />
         <activity android:name=".screen.options.SavedLocalizationAdapter" />
-        <activity android:name=".screen.options.ActivityOptions" />
+        <activity android:name=".screen.options.OptionActivity" />
         <activity android:name=".screen.region.RegionActivity"></activity>
     </application>
 

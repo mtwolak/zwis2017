@@ -2,19 +2,19 @@ package pwr.edu.pl.zwis2017.db.localization;
 
 import android.content.Context;
 
-import pwr.edu.pl.zwis2017.db.localization.primary.PrimaryLocalizationDb;
+import pwr.edu.pl.zwis2017.db.localization.primary.OptionsDb;
 import pwr.edu.pl.zwis2017.db.localization.saved.LocalizationDb;
 
 public class LocalizationManagerDatabase {
 
-    private final PrimaryLocalizationDb primaryLocalizationDb;
+    private final OptionsDb optionsDb;
     private final LocalizationDb localizationDb;
     private static final String UNKNOWN_LOCALIZATION = "Nieznana";
     private static final LocalizationWithCityNamer LOCALIZATION_WITH_CITY_NAME = new LocalizationWithCityNamer();
 
 
     public LocalizationManagerDatabase(Context context) {
-        this.primaryLocalizationDb = new PrimaryLocalizationDb(context);
+        this.optionsDb = new OptionsDb(context);
         this.localizationDb = new LocalizationDb(context);
     }
 
@@ -30,23 +30,23 @@ public class LocalizationManagerDatabase {
     private void setRandomPrimaryLocalizationFromAllLocalizations() {
         String[] allLocalizations = getAllLocalizations();
         if (allLocalizations.length != 0 && isPrimaryLocalizationEmpty()) {
-            primaryLocalizationDb.setPrimaryLocalization(allLocalizations[0]);
+            optionsDb.setPrimaryLocalization(allLocalizations[0]);
         }
     }
 
     private boolean isPrimaryLocalizationEmpty() {
-        return primaryLocalizationDb.getPrimaryLocalization() == null;
+        return optionsDb.getPrimaryLocalization() == null;
     }
 
     private void removeLocalization(String localization) {
-        if (localization.equals(primaryLocalizationDb.getPrimaryLocalization())) {
-            primaryLocalizationDb.removePrimaryLocalization();
+        if (localization.equals(optionsDb.getPrimaryLocalization())) {
+            optionsDb.removePrimaryLocalization();
         }
         localizationDb.remove(localization);
     }
 
     public String getPrimaryLocalization() {
-        String localization = this.primaryLocalizationDb.getPrimaryLocalization();
+        String localization = this.optionsDb.getPrimaryLocalization();
         return localization == null ? UNKNOWN_LOCALIZATION : localization;
     }
 
@@ -62,9 +62,9 @@ public class LocalizationManagerDatabase {
 
     public void setPrimaryLocalization(String localization) {
         if (!isPrimaryLocalizationEmpty()) {
-            primaryLocalizationDb.removePrimaryLocalization();
+            optionsDb.removePrimaryLocalization();
         }
-        primaryLocalizationDb.setPrimaryLocalization(localization);
+        optionsDb.setPrimaryLocalization(localization);
     }
 
 }
