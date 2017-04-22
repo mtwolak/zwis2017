@@ -2,6 +2,7 @@ package pwr.edu.pl.zwis2017.screen.options;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -11,10 +12,11 @@ import android.widget.Toast;
 import pwr.edu.pl.zwis2017.R;
 import pwr.edu.pl.zwis2017.db.localization.LocalizationManagerDatabase;
 import pwr.edu.pl.zwis2017.db.radius.RadiusManagerDatabase;
+import pwr.edu.pl.zwis2017.utils.InputFilterMinMax;
 
 public class OptionActivity extends AppCompatActivity implements OnLocalizationDeleted {
 
-    private EditText radiusTextView;
+    private EditText radiusEditText;
     private ListView listView1;
     private LocalizationManagerDatabase localizationDatabase;
     private SavedLocalizationAdapter adapter;
@@ -47,9 +49,10 @@ public class OptionActivity extends AppCompatActivity implements OnLocalizationD
     }
 
     private void prepareTextViewRadius() {
-        radiusTextView = (EditText) findViewById(R.id.enteredRadius);
+        radiusEditText = (EditText) findViewById(R.id.enteredRadius);
         int radius = radiusManagerDatabase.getRadius();
-        radiusTextView.setText(String.valueOf(radius));
+        radiusEditText.setText(String.valueOf(radius));
+        radiusEditText.setFilters(new InputFilter[]{new InputFilterMinMax("1", "10000")});
     }
 
     @Override
@@ -59,7 +62,9 @@ public class OptionActivity extends AppCompatActivity implements OnLocalizationD
     }
 
     private void saveRadius(int radius) {
-        radiusManagerDatabase.save(radius);
+        if (radius > 0 && radius < 10000) {
+            radiusManagerDatabase.save(radius);
+        }
     }
 
     private void setChangeDefaultLocalizationOnClick() {
@@ -86,6 +91,11 @@ public class OptionActivity extends AppCompatActivity implements OnLocalizationD
     }
 
     public int getRadius() {
-        return Integer.parseInt(radiusTextView.getText().toString().trim());
+        try {
+            return Integer.parseInt(radiusEditText.getText().toString().trim());
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+
     }
 }
