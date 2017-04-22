@@ -6,7 +6,6 @@ import pwr.edu.pl.zwis2017.db.AbstractDatabaseManager;
 
 public class RadiusManagerDatabase extends AbstractDatabaseManager {
 
-
     private static final int DEFAULT_RADIUS = 300;
 
     public RadiusManagerDatabase(Context context)

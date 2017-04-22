@@ -9,7 +9,11 @@ import com.google.maps.model.LatLng;
 import com.google.maps.model.PlaceType;
 import com.google.maps.model.PlacesSearchResponse;
 
+import java.util.List;
+
 import pwr.edu.pl.zwis2017.screen.region.logic.google.GoogleApi;
+import pwr.edu.pl.zwis2017.screen.region.logic.google.GooglePlaceHolder;
+import pwr.edu.pl.zwis2017.screen.region.logic.google.GooglePlaceTypes;
 
 public class RegionInformation implements RegionInformationable {
 
@@ -42,31 +46,19 @@ public class RegionInformation implements RegionInformationable {
     }
 
     @Override
-    public NumberOfPlaces getNumberOfPlaces(int radius) {
+    public List<GooglePlaceHolder> getNumberOfPlaces(int radius) {
         try {
-            NumberOfPlaces numberOfPlaces = new NumberOfPlaces();
-            addPlaceTypes(numberOfPlaces, radius);
-            return numberOfPlaces;
+            GooglePlacesCreator creator = new GooglePlacesCreator(latLng, radius);
+            creator
+                    .add(GooglePlaceTypes.AIRPORT)
+                    .add(GooglePlaceTypes.COMMUNICATION)
+                    .add(GooglePlaceTypes.HEALTH)
+                    .add(GooglePlaceTypes.SCHOOL);
+            creator.retrievePlaces();
+            return creator.getPlaces();
         } catch (Exception e) {
            throw new CannotGetGeoApiException(e);
         }
     }
 
-    private void addPlaceTypes(NumberOfPlaces numberOfPlaces, int radius) throws com.google.maps.errors.ApiException, InterruptedException, java.io.IOException {
-        for(ZwisPlaceType zwisPlaceType : ZwisPlaceType.values())
-        {
-            PlaceType[] googlePlaceTypes = zwisPlaceType.getPlaceTypes();
-            addGoogleType(numberOfPlaces, zwisPlaceType, googlePlaceTypes, radius);
-        }
-    }
-
-    private void addGoogleType(NumberOfPlaces numberOfPlaces, ZwisPlaceType zwisPlaceType, PlaceType[] googlePlaceTypes, int radius) throws com.google.maps.errors.ApiException, InterruptedException, java.io.IOException {
-        for(PlaceType pt : googlePlaceTypes)
-        {
-            RadarSearchRequest radarSearchRequest = PlacesApi.radarSearchQuery(GoogleApi.PLACES.getContext(), latLng, radius);
-            radarSearchRequest.type(pt);
-            PlacesSearchResponse await = radarSearchRequest.await();
-            numberOfPlaces.add(zwisPlaceType, await.results.length);
-        }
-    }
 }
