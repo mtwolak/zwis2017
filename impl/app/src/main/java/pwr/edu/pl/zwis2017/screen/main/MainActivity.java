@@ -17,7 +17,7 @@ import pwr.edu.pl.zwis2017.db.localization.LocalizationWithCityNamer;
 import pwr.edu.pl.zwis2017.screen.options.OptionActivity;
 import pwr.edu.pl.zwis2017.screen.maps.MapActivity;
 import pwr.edu.pl.zwis2017.screen.region.RegionActivity;
-import pwr.edu.pl.zwis2017.utils.WifiChecker;
+import pwr.edu.pl.zwis2017.utils.InternetChecker;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOCALIZATION_REMEMBERED = "Lokalizacja zapamiętana";
     private static final String LOCALIZATION_CANNOT_BE_REMEMBERED_EXISTS_ALREADY = "Lokalizacja nie może być zapamiętana, ponieważ już istnieje w pamięci";
     private static final LocalizationWithCityNamer LOCALIZATION_WITH_CITY_NAMER = new LocalizationWithCityNamer();
-    private WifiChecker wifiChecker;
+    private InternetChecker internetChecker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +53,11 @@ public class MainActivity extends AppCompatActivity {
         enteredLocalizationEditText = (EditText) findViewById(R.id.actualLocalizationTxt);
         actualLocalizationLbl = (TextView) findViewById(R.id.actualLocalizationLbl);
         localizationDatabase = new LocalizationManagerDatabase(this);
-        wifiChecker = new WifiChecker(this);
+        internetChecker = new InternetChecker(this);
     }
 
     private void setButtonsListeners() {
-        findViewById(R.id.btnMap).setOnClickListener(new ActivityWithWifiEnabledListener(MainActivity.this, wifiChecker) {
+        findViewById(R.id.btnMap).setOnClickListener(new ActivityWithInternetEnabledListener(MainActivity.this, internetChecker) {
             @Override
             public Intent createIntent() {
                 Intent intent = new Intent(MainActivity.this, MapActivity.class);
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.regionInfoBtn).setOnClickListener(new ActivityWithWifiEnabledListener(MainActivity.this, wifiChecker) {
+        findViewById(R.id.regionInfoBtn).setOnClickListener(new ActivityWithInternetEnabledListener(MainActivity.this, internetChecker) {
             @Override
             public Intent createIntent() {
                 Intent intent = new Intent(MainActivity.this, RegionActivity.class);

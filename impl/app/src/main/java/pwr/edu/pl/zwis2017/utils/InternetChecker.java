@@ -7,18 +7,19 @@ import android.net.NetworkInfo;
 
 import static android.content.Context.CONNECTIVITY_SERVICE;
 
-public class WifiChecker {
+public class InternetChecker {
 
     private final Context context;
 
-    public WifiChecker(Activity activity) {
+    public InternetChecker(Activity activity) {
         this.context = activity.getApplicationContext();
     }
 
-    public boolean isWifiEnabled() {
+    public boolean isInternetEnabled() {
         ConnectivityManager man = (ConnectivityManager) context.getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo wifi = man.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-        return wifi.isConnected();
+        NetworkInfo mobile = man.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        return wifi.isConnected() || mobile.isConnected();
     }
-    
+
 }
