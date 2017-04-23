@@ -17,6 +17,7 @@ import pwr.edu.pl.zwis2017.db.localization.LocalizationWithCityNamer;
 import pwr.edu.pl.zwis2017.screen.options.OptionActivity;
 import pwr.edu.pl.zwis2017.screen.maps.MapActivity;
 import pwr.edu.pl.zwis2017.screen.region.RegionActivity;
+import pwr.edu.pl.zwis2017.utils.WifiChecker;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOCALIZATION_REMEMBERED = "Lokalizacja zapamiętana";
     private static final String LOCALIZATION_CANNOT_BE_REMEMBERED_EXISTS_ALREADY = "Lokalizacja nie może być zapamiętana, ponieważ już istnieje w pamięci";
     private static final LocalizationWithCityNamer LOCALIZATION_WITH_CITY_NAMER = new LocalizationWithCityNamer();
+    private WifiChecker wifiChecker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,33 +53,34 @@ public class MainActivity extends AppCompatActivity {
         enteredLocalizationEditText = (EditText) findViewById(R.id.actualLocalizationTxt);
         actualLocalizationLbl = (TextView) findViewById(R.id.actualLocalizationLbl);
         localizationDatabase = new LocalizationManagerDatabase(this);
+        wifiChecker = new WifiChecker(this);
     }
 
     private void setButtonsListeners() {
-        findViewById(R.id.btnMap).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnMap).setOnClickListener(new ActivityWithWifiEnabledListener(MainActivity.this, wifiChecker) {
             @Override
-            public void onClick(View v) {
+            public Intent createIntent() {
                 Intent intent = new Intent(MainActivity.this, MapActivity.class);
                 intent.putExtra("enteredLocalization", getPrimaryLocalization());
-                startActivity(intent);
+                return intent;
             }
         });
-        findViewById(R.id.rememberedLocalizationBtn).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.optionsBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, OptionActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(MainActivity.this, OptionActivity.class));
+            }
+        });
 
-            }
-        });
-        findViewById(R.id.regionInfoBtn).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.regionInfoBtn).setOnClickListener(new ActivityWithWifiEnabledListener(MainActivity.this, wifiChecker) {
             @Override
-            public void onClick(View v) {
+            public Intent createIntent() {
                 Intent intent = new Intent(MainActivity.this, RegionActivity.class);
                 intent.putExtra(RegionActivity.ACTUAL_LOCALIZATION, getPrimaryLocalization());
-                startActivity(intent);
+                return intent;
             }
         });
+
     }
 
     @Override
