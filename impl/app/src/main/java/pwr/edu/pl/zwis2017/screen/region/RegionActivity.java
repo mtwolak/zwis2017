@@ -2,7 +2,10 @@ package pwr.edu.pl.zwis2017.screen.region;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ExpandableListView;
+import android.widget.TableLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pwr.edu.pl.zwis2017.R;
@@ -11,6 +14,7 @@ import pwr.edu.pl.zwis2017.db.radius.RadiusManagerDatabase;
 import pwr.edu.pl.zwis2017.screen.region.logic.RegionInformation;
 import pwr.edu.pl.zwis2017.screen.region.logic.RegionInformationable;
 import pwr.edu.pl.zwis2017.screen.region.logic.google.GooglePlaceHolder;
+import pwr.edu.pl.zwis2017.screen.region.logic.layout.LayoutCreator;
 
 public class RegionActivity extends AppCompatActivity {
 
@@ -24,8 +28,13 @@ public class RegionActivity extends AppCompatActivity {
         radiusManagerDatabase = new RadiusManagerDatabase(this);
 
         RegionInformationable regionInformation = getRegionInformation(getActualLocalization());
-        double elevation = regionInformation.getElevation();
-        List<GooglePlaceHolder> numberOfPlaces = regionInformation.getNumberOfPlaces(radiusManagerDatabase.getRadius());
+
+        //double elevation = regionInformation.getElevation();
+        List<GooglePlaceHolder> informationAboutPlaces = regionInformation.getNumberOfPlaces(radiusManagerDatabase.getRadius());
+
+        ExpandableListViewAdapter adapter = new ExpandableListViewAdapter(this, informationAboutPlaces);
+        ExpandableListView view = (ExpandableListView) findViewById(R.id.regionExpandableListView);
+        view.setAdapter(adapter);
     }
 
     private RegionInformation getRegionInformation(String localizationName) {

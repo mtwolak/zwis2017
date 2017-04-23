@@ -1,27 +1,28 @@
 package pwr.edu.pl.zwis2017.screen.region.logic.google;
 
 public class GooglePlaceHolder {
-    private final GooglePlace[] googlePlaces;
+    private GooglePlace[] googlePlaces;
     private final String name;
 
-    public GooglePlaceHolder(String name, GooglePlace ... googlePlaces) {
+    public GooglePlaceHolder(String name, GooglePlace... googlePlaces) {
         this.name = name;
         this.googlePlaces = googlePlaces;
     }
 
-    public int getCount()
-    {
+    public int getCount() {
         int count = 0;
-        for(GooglePlace googlePlace : googlePlaces)
-        {
+        for (GooglePlace googlePlace : googlePlaces) {
             count += googlePlace.getCount();
         }
         return count;
     }
 
-    public GooglePlace[] getGooglePlaces()
-    {
+    public GooglePlace[] getGooglePlaces() {
         return googlePlaces;
     }
 
+    @Override
+    public String toString() {
+        return name + " (" + getCount() + ")";
+    }
 }

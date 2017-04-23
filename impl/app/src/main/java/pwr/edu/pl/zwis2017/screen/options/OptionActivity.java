@@ -40,9 +40,9 @@ public class OptionActivity extends AppCompatActivity implements OnLocalizationD
 
     private void prepareListViewWithLocalizations() {
         String[] data = localizationDatabase.getAllLocalizations();
-        adapter = new SavedLocalizationAdapter(this, R.layout.listview_item_row, data);
+        adapter = new SavedLocalizationAdapter(this, R.layout.listview_item_remembered_localization_row, data);
         listView1 = (ListView) findViewById(R.id.listView1);
-        View header = getLayoutInflater().inflate(R.layout.listview_header_row, null);
+        View header = getLayoutInflater().inflate(R.layout.listview_region_header_row, null);
         listView1.addHeaderView(header);
         setChangeDefaultLocalizationOnClick();
         listView1.setAdapter(adapter);

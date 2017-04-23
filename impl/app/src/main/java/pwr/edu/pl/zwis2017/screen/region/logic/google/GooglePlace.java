@@ -8,24 +8,26 @@ public class GooglePlace {
     private final PlaceType placeType;
     private int count;
 
-    public GooglePlace(String name, PlaceType placeType)
-    {
+    public GooglePlace(String name, PlaceType placeType) {
         this.name = name;
         this.placeType = placeType;
     }
 
-    public void setCount(int count)
-    {
+
+    public void setCount(int count) {
         this.count = count;
     }
 
-    public int getCount()
-    {
+    public int getCount() {
         return count;
     }
 
-    public PlaceType getPlaceType()
-    {
+    public PlaceType getPlaceType() {
         return placeType;
+    }
+
+    @Override
+    public String toString() {
+        return name + ": " + getCount();
     }
 }
