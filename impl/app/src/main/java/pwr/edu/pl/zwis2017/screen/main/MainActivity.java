@@ -16,7 +16,7 @@ import pwr.edu.pl.zwis2017.db.localization.LocalizationManagerDatabase;
 import pwr.edu.pl.zwis2017.db.localization.LocalizationWithCityNamer;
 import pwr.edu.pl.zwis2017.screen.options.OptionActivity;
 import pwr.edu.pl.zwis2017.screen.maps.MapActivity;
-import pwr.edu.pl.zwis2017.screen.region.RegionActivity;
+import pwr.edu.pl.zwis2017.screen.region.intent.RegionIntentCreator;
 import pwr.edu.pl.zwis2017.utils.InternetChecker;
 
 public class MainActivity extends AppCompatActivity {
@@ -75,9 +75,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.regionInfoBtn).setOnClickListener(new ActivityWithInternetEnabledListener(MainActivity.this, internetChecker) {
             @Override
             public Intent createIntent() {
-                Intent intent = new Intent(MainActivity.this, RegionActivity.class);
-                intent.putExtra(RegionActivity.ACTUAL_LOCALIZATION, getPrimaryLocalization());
-                return intent;
+                return new RegionIntentCreator(MainActivity.this, getPrimaryLocalization()).getIntent();
             }
         });
 

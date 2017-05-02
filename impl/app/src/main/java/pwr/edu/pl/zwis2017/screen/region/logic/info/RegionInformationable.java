@@ -1,4 +1,4 @@
-package pwr.edu.pl.zwis2017.screen.region.logic;
+package pwr.edu.pl.zwis2017.screen.region.logic.info;
 
 import java.util.List;
 

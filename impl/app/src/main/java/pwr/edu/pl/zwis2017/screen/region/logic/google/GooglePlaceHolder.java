@@ -1,6 +1,8 @@
 package pwr.edu.pl.zwis2017.screen.region.logic.google;
 
-public class GooglePlaceHolder {
+import java.io.Serializable;
+
+public class GooglePlaceHolder implements Serializable {
     private GooglePlace[] googlePlaces;
     private final String name;
 

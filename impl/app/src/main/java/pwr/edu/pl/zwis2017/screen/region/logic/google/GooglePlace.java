@@ -2,7 +2,9 @@ package pwr.edu.pl.zwis2017.screen.region.logic.google;
 
 import com.google.maps.model.PlaceType;
 
-public class GooglePlace {
+import java.io.Serializable;
+
+public class GooglePlace implements Serializable {
 
     private final String name;
     private final PlaceType placeType;
