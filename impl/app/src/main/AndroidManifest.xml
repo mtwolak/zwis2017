@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -43,7 +43,8 @@
             android:label="@string/title_activity_area_map" />
         <activity android:name=".screen.options.SavedLocalizationAdapter" />
         <activity android:name=".screen.options.OptionActivity" />
-        <activity android:name=".screen.region.RegionActivity"></activity>
+        <activity android:name=".screen.region.RegionActivity" />
+        <activity android:name=".screen.maps.PlacePickerActivity"></activity>
     </application>
 
 </manifest>
