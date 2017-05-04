@@ -12,10 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
@@ -24,7 +20,6 @@ import pwr.edu.pl.zwis2017.db.localization.LocalizationManagerDatabase;
 import pwr.edu.pl.zwis2017.db.localization.LocalizationWithCityNamer;
 import pwr.edu.pl.zwis2017.screen.maps.PlacePickerActivity;
 import pwr.edu.pl.zwis2017.screen.options.OptionActivity;
-import pwr.edu.pl.zwis2017.screen.maps.MapActivity;
 import pwr.edu.pl.zwis2017.screen.region.intent.RegionIntentCreator;
 import pwr.edu.pl.zwis2017.utils.InternetChecker;
 
