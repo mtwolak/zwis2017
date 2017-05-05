@@ -1,4 +1,4 @@
-package pwr.edu.pl.zwis2017.utils;
+package pwr.edu.pl.zwis2017.utils.internet.checker;
 
 import android.app.Activity;
 import android.content.Context;

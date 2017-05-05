@@ -14,10 +14,12 @@ import android.widget.Toast;
 import pwr.edu.pl.zwis2017.R;
 import pwr.edu.pl.zwis2017.db.localization.LocalizationManagerDatabase;
 import pwr.edu.pl.zwis2017.db.localization.LocalizationWithCityNamer;
-import pwr.edu.pl.zwis2017.screen.maps.MapActivity;
+import pwr.edu.pl.zwis2017.screen.maps.MapCreator;
 import pwr.edu.pl.zwis2017.screen.options.OptionActivity;
 import pwr.edu.pl.zwis2017.screen.region.intent.RegionIntentCreator;
-import pwr.edu.pl.zwis2017.utils.InternetChecker;
+import pwr.edu.pl.zwis2017.utils.internet.checker.InternetChecker;
+import pwr.edu.pl.zwis2017.utils.internet.restriction.CasualStartActivityWithInternet;
+import pwr.edu.pl.zwis2017.utils.internet.restriction.StartWithResultActivityWithInternet;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -56,16 +58,24 @@ public class MainActivity extends AppCompatActivity {
         internetChecker = new InternetChecker(this);
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode,
+                                    int resultCode, Intent data) {
+        //obsługa przycisku back z mapy, jeśli jest taka potrzeba w ogóle
+        //jeśli potrzebna, to stwórz nową klasę i tutaj ją stwórz i coś tam rób
+        // jeśli niepotrzebne, do metoda do usunięcia
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     private void setButtonsListeners() {
-        findViewById(R.id.btnMap).setOnClickListener(new ActivityWithInternetEnabledListener(MainActivity.this, internetChecker) {
+        findViewById(R.id.btnMap).setOnClickListener(new StartWithResultActivityWithInternet(MainActivity.this, internetChecker, MapCreator.PLACE_PICKER_REQUEST) {
             @Override
             public Intent createIntent() {
-                Intent intent = new Intent(MainActivity.this, MapActivity.class);
-                intent.putExtra("enteredLocalization", getPrimaryLocalization());
-                return intent;
+                return new MapCreator().createIntent(MainActivity.this);
+
             }
         });
-
         findViewById(R.id.optionsBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.regionInfoBtn).setOnClickListener(new ActivityWithInternetEnabledListener(MainActivity.this, internetChecker) {
+        findViewById(R.id.regionInfoBtn).setOnClickListener(new CasualStartActivityWithInternet(MainActivity.this, internetChecker) {
             @Override
             public Intent createIntent() {
                 return new RegionIntentCreator(MainActivity.this, getPrimaryLocalization()).getIntent();
