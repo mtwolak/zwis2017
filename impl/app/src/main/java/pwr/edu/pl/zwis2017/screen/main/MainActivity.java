@@ -72,7 +72,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btnMap).setOnClickListener(new StartWithResultActivityWithInternet(MainActivity.this, internetChecker, MapCreator.PLACE_PICKER_REQUEST) {
             @Override
             public Intent createIntent() {
-                return new MapCreator().createIntent(MainActivity.this);
+                MapCreator mapCreator = new MapCreator();
+                mapCreator.setLatLngBounds(mapCreator.getLocationFromAddress(MainActivity.this, getEnteredLocalization().toString()));
+                return mapCreator.createIntent(MainActivity.this);
 
             }
         });
