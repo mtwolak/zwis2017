@@ -1,6 +1,7 @@
 package pwr.edu.pl.zwis2017.screen.main;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,8 +15,8 @@ import android.widget.Toast;
 import pwr.edu.pl.zwis2017.R;
 import pwr.edu.pl.zwis2017.db.localization.LocalizationManagerDatabase;
 import pwr.edu.pl.zwis2017.db.localization.LocalizationWithCityNamer;
-import pwr.edu.pl.zwis2017.screen.maps.MapActivity;
-import pwr.edu.pl.zwis2017.screen.maps.MapCreator;
+import pwr.edu.pl.zwis2017.screen.maps.selected.MapActivity;
+import pwr.edu.pl.zwis2017.screen.maps.nearby.MapCreator;
 import pwr.edu.pl.zwis2017.screen.options.OptionActivity;
 import pwr.edu.pl.zwis2017.screen.region.intent.RegionIntentCreator;
 import pwr.edu.pl.zwis2017.utils.internet.checker.InternetChecker;
@@ -27,10 +28,12 @@ public class MainActivity extends AppCompatActivity {
     private LocalizationManagerDatabase localizationDatabase;
     private TextView actualLocalizationLbl;
     private EditText enteredLocalizationEditText;
+    public static final String ENTERED_LOCALIZATION = "enteredLocalization";
     private static final String LOCALIZATION_REMEMBERED = "Lokalizacja zapamiętana";
     private static final String LOCALIZATION_CANNOT_BE_REMEMBERED_EXISTS_ALREADY = "Lokalizacja nie może być zapamiętana, ponieważ już istnieje w pamięci";
     private static final LocalizationWithCityNamer LOCALIZATION_WITH_CITY_NAMER = new LocalizationWithCityNamer();
     private InternetChecker internetChecker;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,32 +62,17 @@ public class MainActivity extends AppCompatActivity {
         internetChecker = new InternetChecker(this);
     }
 
-
-    @Override
-    protected void onActivityResult(int requestCode,
-                                    int resultCode, Intent data) {
-        //obsługa przycisku back z mapy, jeśli jest taka potrzeba w ogóle
-        //jeśli potrzebna, to stwórz nową klasę i tutaj ją stwórz i coś tam rób
-        // jeśli niepotrzebne, do metoda do usunięcia
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
     private void setButtonsListeners() {
         findViewById(R.id.nearbyPlacesMapBtn).setOnClickListener(new StartWithResultActivityWithInternet(MainActivity.this, internetChecker, MapCreator.PLACE_PICKER_REQUEST) {
             @Override
             public Intent createIntent() {
-                MapCreator mapCreator = new MapCreator();
-                mapCreator.setLatLngBounds(mapCreator.getLocationFromAddress(MainActivity.this, getEnteredLocalization().toString()));
-                return mapCreator.createIntent(MainActivity.this);
-
+                return createIntentForNearbyPlaces();
             }
         });
         findViewById(R.id.selectedPlacesMapBtn).setOnClickListener(new CasualStartActivityWithInternet(MainActivity.this, internetChecker) {
             @Override
             public Intent createIntent() {
-                Intent intent = new Intent(MainActivity.this, MapActivity.class);
-                intent.putExtra("enteredLocalization", getPrimaryLocalization());
-                return intent;
+                return createIntentForSelectedPlaces();
             }
         });
         findViewById(R.id.optionsBtn).setOnClickListener(new View.OnClickListener() {
@@ -101,6 +89,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private Intent createIntentForNearbyPlaces() {
+        MapCreator mapCreator = new MapCreator();
+        mapCreator.setLatLngBounds(mapCreator.getLocationFromAddress(MainActivity.this, getEnteredLocalization().toString()));
+        return mapCreator.createIntent(MainActivity.this);
+    }
+
+    @NonNull
+    private Intent createIntentForSelectedPlaces() {
+        Intent intent = new Intent(MainActivity.this, MapActivity.class);
+        intent.putExtra(ENTERED_LOCALIZATION, getPrimaryLocalization());
+        return intent;
     }
 
     @Override

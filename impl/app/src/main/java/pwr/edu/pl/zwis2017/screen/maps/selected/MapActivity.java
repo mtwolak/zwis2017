@@ -1,4 +1,4 @@
-package pwr.edu.pl.zwis2017.screen.maps;
+package pwr.edu.pl.zwis2017.screen.maps.selected;
 
 import android.content.Context;
 import android.location.Geocoder;
@@ -20,6 +20,7 @@ import java.util.List;
 
 import pwr.edu.pl.zwis2017.R;
 import pwr.edu.pl.zwis2017.db.localization.LocalizationManagerDatabase;
+import pwr.edu.pl.zwis2017.screen.main.MainActivity;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -31,7 +32,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         super.onCreate(savedInstanceState);
         localizationDatabase = new LocalizationManagerDatabase(this);
         Bundle bundle = getIntent().getExtras();
-        enteredLocalization = bundle.getString("enteredLocalization");
+        enteredLocalization = bundle.getString(MainActivity.ENTERED_LOCALIZATION);
         setContentView(R.layout.activity_area_map);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);

@@ -1,4 +1,4 @@
-package pwr.edu.pl.zwis2017.screen.maps;
+package pwr.edu.pl.zwis2017.screen.maps.nearby;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,6 +12,8 @@ import com.google.android.gms.maps.model.LatLngBounds;
 
 import java.io.IOException;
 import java.util.List;
+
+import pwr.edu.pl.zwis2017.screen.maps.CannotCreateMapPickerException;
 
 public class MapCreator {
 

@@ -38,7 +38,7 @@
             android:value="AIzaSyBNYW0HVP518wt7IGCyDfwKDXmxcqVAE4s" />
 
         <activity
-            android:name=".screen.maps.MapActivity"
+            android:name=".screen.maps.selected.MapActivity"
             android:label="@string/title_activity_area_map" />
         <activity android:name=".screen.options.SavedLocalizationAdapter" />
         <activity android:name=".screen.options.OptionActivity" />
