@@ -14,6 +14,7 @@ import android.widget.Toast;
 import pwr.edu.pl.zwis2017.R;
 import pwr.edu.pl.zwis2017.db.localization.LocalizationManagerDatabase;
 import pwr.edu.pl.zwis2017.db.localization.LocalizationWithCityNamer;
+import pwr.edu.pl.zwis2017.screen.maps.MapActivity;
 import pwr.edu.pl.zwis2017.screen.maps.MapCreator;
 import pwr.edu.pl.zwis2017.screen.options.OptionActivity;
 import pwr.edu.pl.zwis2017.screen.region.intent.RegionIntentCreator;
@@ -69,13 +70,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setButtonsListeners() {
-        findViewById(R.id.btnMap).setOnClickListener(new StartWithResultActivityWithInternet(MainActivity.this, internetChecker, MapCreator.PLACE_PICKER_REQUEST) {
+        findViewById(R.id.nearbyPlacesMapBtn).setOnClickListener(new StartWithResultActivityWithInternet(MainActivity.this, internetChecker, MapCreator.PLACE_PICKER_REQUEST) {
             @Override
             public Intent createIntent() {
                 MapCreator mapCreator = new MapCreator();
                 mapCreator.setLatLngBounds(mapCreator.getLocationFromAddress(MainActivity.this, getEnteredLocalization().toString()));
                 return mapCreator.createIntent(MainActivity.this);
 
+            }
+        });
+        findViewById(R.id.selectedPlacesMapBtn).setOnClickListener(new CasualStartActivityWithInternet(MainActivity.this, internetChecker) {
+            @Override
+            public Intent createIntent() {
+                Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                intent.putExtra("enteredLocalization", getPrimaryLocalization());
+                return intent;
             }
         });
         findViewById(R.id.optionsBtn).setOnClickListener(new View.OnClickListener() {
