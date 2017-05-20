@@ -46,10 +46,12 @@ public class RegionInformation implements RegionInformationable {
         try {
             GooglePlacesCreator creator = new GooglePlacesCreator(latLng, radius);
             creator
-                    .add(GooglePlaceTypes.AIRPORT)
-                    .add(GooglePlaceTypes.COMMUNICATION)
                     .add(GooglePlaceTypes.HEALTH)
-                    .add(GooglePlaceTypes.SCHOOL);
+                    .add(GooglePlaceTypes.COMMUNICATION)
+                    .add(GooglePlaceTypes.SCHOOL)
+                    .add(GooglePlaceTypes.ENTERTAINMENT)
+                    .add(GooglePlaceTypes.GASTRONOMY)
+                    .add(GooglePlaceTypes.OTHER);
             creator.retrievePlaces();
             return creator.getPlaces();
         } catch (Exception e) {
