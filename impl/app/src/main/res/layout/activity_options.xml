@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#FFFFFF"
+    android:background="@drawable/background"
     android:weightSum="1">
 
     <TableLayout
@@ -19,7 +19,8 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Promień wyszukiwania obiektów" />
+                android:text="Promień wyszukiwania obiektów"
+                android:textColor="@android:color/background_light" />
 
             <EditText
                 android:id="@+id/enteredRadius"
@@ -27,7 +28,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="number"
-                android:text="Number" />
+                android:text="Number"
+                android:textColor="@color/colorAccent" />
         </TableRow>
 
         <TableRow

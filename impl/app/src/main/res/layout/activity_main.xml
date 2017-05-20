@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context="pwr.edu.pl.zwis2017.screen.main.MainActivity">
 
 
@@ -10,34 +11,37 @@
         android:id="@+id/actualLocalizationTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_span="2"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="localization"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:textColor="?attr/colorControlActivated" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Twoja aktualna lokalizacja:"
-        android:layout_below="@+id/actualLocalizationTxt"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/actualLocalizationTxt"
+        android:text="Twoja aktualna lokalizacja:"
+        android:textColor="@android:color/background_light" />
 
     <TextView
         android:id="@+id/actualLocalizationLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Wybrana lokalizacja"
-        android:textStyle="bold"
-        android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView"
+        android:text="Wybrana lokalizacja"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold" />
 
     <TableLayout
         android:layout_width="match_parent"

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@drawable/background"
     android:layout_height="match_parent">
 
     <TextView
@@ -9,12 +10,16 @@
         android:layout_height="wrap_content"
         android:text="Zebrane dane o okolicy"
         android:textAlignment="center"
+        android:textColor="@android:color/background_light"
         android:textSize="24sp"
         android:textStyle="bold" />
 
     <ExpandableListView
         android:id="@+id/regionExpandableListView"
         android:layout_width="match_parent"
+        android:divider="#FFFFFF"
+        android:childDivider="#FFFF00"
+        android:dividerHeight="4px"
         android:layout_height="match_parent" />
 
 
