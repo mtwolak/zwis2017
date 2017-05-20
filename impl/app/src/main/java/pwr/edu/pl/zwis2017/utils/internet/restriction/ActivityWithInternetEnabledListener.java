@@ -28,7 +28,7 @@ public abstract class ActivityWithInternetEnabledListener implements View.OnClic
         if (internetChecker.isInternetEnabled()) {
             startMethod(activity, createIntent());
         } else {
-            Toast.makeText(activity, "Brak połączenia z internetem - nie można wykonać żądanej akcji", Toast.LENGTH_LONG).show();
+            internetChecker.showMessageInternetUnavailable(activity);
         }
 
 

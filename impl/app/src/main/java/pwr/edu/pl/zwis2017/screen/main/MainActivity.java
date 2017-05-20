@@ -84,12 +84,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.regionInfoBtn).setOnClickListener(new CasualStartActivityWithInternet(MainActivity.this, internetChecker) {
-            @Override
-            public Intent createIntent() {
-                return new RegionIntentCreator(MainActivity.this, getPrimaryLocalization()).getIntent();
-            }
-        });
+        findViewById(R.id.regionInfoBtn).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(!internetChecker.isInternetEnabled()) {
+                            internetChecker.showMessageInternetUnavailable(MainActivity.this);
+                        }
+                        else {
+                            new RegionIntentCreator(MainActivity.this, getPrimaryLocalization());
+                        }
+                    }
+                }
+        );
 
     }
 
@@ -144,4 +151,7 @@ public class MainActivity extends AppCompatActivity {
         return localizationDatabase.getPrimaryLocalization();
     }
 
+    public void onRegionIntentCreated(Intent intent) {
+        startActivity(intent);
+    }
 }

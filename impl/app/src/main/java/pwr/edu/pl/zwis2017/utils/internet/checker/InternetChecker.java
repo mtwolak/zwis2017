@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.widget.Toast;
 
 import static android.content.Context.CONNECTIVITY_SERVICE;
 
@@ -20,6 +21,11 @@ public class InternetChecker {
         NetworkInfo wifi = man.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         NetworkInfo mobile = man.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
         return wifi.isConnected() || mobile.isConnected();
+    }
+
+    public void showMessageInternetUnavailable(Context context)
+    {
+        Toast.makeText(context, "Brak połączenia z internetem - nie można wykonać żądanej akcji", Toast.LENGTH_LONG).show();
     }
 
 }
