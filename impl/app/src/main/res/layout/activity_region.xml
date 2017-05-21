@@ -14,6 +14,13 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/elevation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Elevation"
+        android:textColor="@android:color/background_light" />
+
     <ExpandableListView
         android:id="@+id/regionExpandableListView"
         android:layout_width="match_parent"

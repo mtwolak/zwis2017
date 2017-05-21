@@ -23,6 +23,10 @@ public class RegionInformationHolder implements Serializable {
         return this;
     }
 
+    public double getElevation() {
+        return elevation;
+    }
+
     public List<GooglePlaceHolder> getPlaces() {
         return numberOfPlaces;
     }
