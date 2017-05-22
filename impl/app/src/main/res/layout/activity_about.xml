@@ -1,9 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="pwr.edu.pl.zwis2017.screen.about.AboutActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@drawable/background"
+    android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/aboutLbl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="O aplikacji:"
+        android:textAlignment="textStart"
+        android:textColor="@android:color/background_light"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/aboutCtl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Aplikacja InwenTer gromadzi niezbędne dane, wymagane do przeprowadzenia inwentaryzacji terenu i wyświetla je w postaci list rozwijanych podzielonych na poszczególne kategorie obiektów. Ponadto umożliwia użytkownikom zapamiętywanie ulubionych lokalizacji wraz z zaznaczaniem ich na mapie oraz przeglądanie miejsc w ich pobliżu."
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/authorsLbl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Autorzy:"
+        android:textAlignment="textStart"
+        android:textColor="@android:color/background_light"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/authorsCtl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Marcin Wolak                                               Tomasz Wasielewski                                       Michał Widanka"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/apiLbl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Zintegrowane API:"
+        android:textAlignment="textStart"
+        android:textColor="@android:color/background_light"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/apiCtl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="W ramach aplikacji wykorzystano i zintegowano następujace API:                                            Google Places API                                        Google Maps Android API                           Google Maps Geocoding API                      Google Maps Elevation API"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
+
+</LinearLayout>
