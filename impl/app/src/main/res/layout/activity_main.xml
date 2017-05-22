@@ -6,7 +6,6 @@
     android:background="@drawable/background"
     tools:context="pwr.edu.pl.zwis2017.screen.main.MainActivity">
 
-
     <EditText
         android:id="@+id/actualLocalizationTxt"
         android:layout_width="wrap_content"
@@ -20,7 +19,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="localization"
-        android:textColor="?attr/colorControlActivated" />
+        android:textColor="@android:color/holo_blue_bright" />
 
     <TextView
         android:id="@+id/textView"
