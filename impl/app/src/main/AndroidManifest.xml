@@ -43,7 +43,11 @@
         <activity android:name=".screen.options.SavedLocalizationAdapter" />
         <activity android:name=".screen.options.OptionActivity" />
         <activity android:name=".screen.region.RegionActivity" />
-        <activity android:name=".screen.about.AboutActivity"></activity>
+        <activity android:name=".screen.about.AboutActivity" />
+        <activity
+            android:name=".screen.instruction.InstructionActivity"
+            android:label="@string/title_activity_instruction"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
