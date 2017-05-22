@@ -18,7 +18,7 @@
         android:id="@+id/aboutCtl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Aplikacja InwenTer gromadzi niezbędne dane, wymagane do przeprowadzenia inwentaryzacji terenu i wyświetla je w postaci list rozwijanych podzielonych na poszczególne kategorie obiektów. Ponadto umożliwia użytkownikom zapamiętywanie ulubionych lokalizacji wraz z zaznaczaniem ich na mapie oraz przeglądanie miejsc w ich pobliżu."
+        android:text="Aplikacja InwenTer gromadzi niezbędne dane, wymagane do przeprowadzenia inwentaryzacji terenu i wyświetla je w postaci list rozwijanych podzielonych na poszczególne kategorie obiektów. Ponadto umożliwia użytkownikom zapamiętywanie ulubionych lokalizacji wraz\nz zaznaczaniem ich na mapie oraz przeglądanie miejsc w ich pobliżu."
         android:textColor="@android:color/background_light"
         android:textSize="18sp" />
 
@@ -36,7 +36,8 @@
         android:id="@+id/authorsCtl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Marcin Wolak                                               Tomasz Wasielewski                                       Michał Widanka"
+        android:lines="3"
+        android:text="Marcin Wolak\nTomasz Wasielewski\nMichał Widanka"
         android:textColor="@android:color/background_light"
         android:textSize="18sp" />
 
@@ -54,7 +55,8 @@
         android:id="@+id/apiCtl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="W ramach aplikacji wykorzystano i zintegowano następujace API:                                            Google Places API                                        Google Maps Android API                           Google Maps Geocoding API                      Google Maps Elevation API"
+        android:lines="6"
+        android:text="W ramach aplikacji wykorzystano i zintegowano następujace API:\nGoogle Places API\nGoogle Maps Android API\nGoogle Maps Geocoding API\nGoogle Maps Elevation API"
         android:textColor="@android:color/background_light"
         android:textSize="18sp" />
 
