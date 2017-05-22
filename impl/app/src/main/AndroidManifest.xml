@@ -43,6 +43,7 @@
         <activity android:name=".screen.options.SavedLocalizationAdapter" />
         <activity android:name=".screen.options.OptionActivity" />
         <activity android:name=".screen.region.RegionActivity" />
+        <activity android:name=".screen.about.AboutActivity"></activity>
     </application>
 
 </manifest>

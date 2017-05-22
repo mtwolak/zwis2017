@@ -17,6 +17,7 @@ import android.widget.Toast;
 import pwr.edu.pl.zwis2017.R;
 import pwr.edu.pl.zwis2017.db.localization.LocalizationManagerDatabase;
 import pwr.edu.pl.zwis2017.db.localization.LocalizationWithCityNamer;
+import pwr.edu.pl.zwis2017.screen.about.AboutActivity;
 import pwr.edu.pl.zwis2017.screen.maps.selected.MapActivity;
 import pwr.edu.pl.zwis2017.screen.maps.nearby.MapCreator;
 import pwr.edu.pl.zwis2017.screen.options.OptionActivity;
@@ -97,7 +98,12 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
-
+        findViewById(R.id.aboutBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, AboutActivity.class));
+            }
+        });
     }
 
     private Intent createIntentForNearbyPlaces() {
