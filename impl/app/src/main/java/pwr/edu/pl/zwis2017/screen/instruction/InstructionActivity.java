@@ -22,7 +22,7 @@ public class InstructionActivity extends AppCompatActivity implements OnPageChan
 {
 
     private PDFView pdfView;
-    private static final String SAMPLE_FILE = "Regulamin_konkursu_filmowego_Sklodowska.pdf";
+    private static final String SAMPLE_FILE = "InwenTer_Instruction.pdf";
     private String pdfFileName;
     private Integer pageNumber = 0;
 
