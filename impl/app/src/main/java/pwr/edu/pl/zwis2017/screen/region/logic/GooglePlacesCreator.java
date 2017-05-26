@@ -6,6 +6,7 @@ import com.google.maps.RadarSearchRequest;
 import com.google.maps.model.LatLng;
 import com.google.maps.model.PlaceType;
 import com.google.maps.model.PlacesSearchResponse;
+import com.google.maps.model.PlacesSearchResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class GooglePlacesCreator {
     private final int radius;
     private List<GooglePlaceTypes> placeTypes;
     private List<GooglePlaceHolder> googlePlaceHolderWithCount;
+    private static final MinimumDistanceBetweenTwoObjectsEvaluator DISTANCE_EVALUATOR = new MinimumDistanceBetweenTwoObjectsEvaluator();
 
     public GooglePlacesCreator(LatLng latLng, int radius) {
         this.localization = latLng;
@@ -43,18 +45,19 @@ public class GooglePlacesCreator {
     private void addCountForPlaces(GooglePlaceTypes googlePlaceHolder) {
         GooglePlaceHolder placeHolder = googlePlaceHolder.getPlaceHolder();
         for (GooglePlace place : placeHolder.getGooglePlaces()) {
-            int count = getCount(place.getPlaceType());
-            place.setCount(count);
+            PlacesSearchResult[] placesFromGoogleWebApi = getRetrievedPlacesFromGoogleWebApi(place.getPlaceType());
+            place.setCount(placesFromGoogleWebApi.length);
+            place.setMinimumDistance(DISTANCE_EVALUATOR.getMinimumDistance(localization, placesFromGoogleWebApi));
         }
         googlePlaceHolderWithCount.add(placeHolder);
     }
 
-    private int getCount(PlaceType placeType) {
+    private PlacesSearchResult[] getRetrievedPlacesFromGoogleWebApi(PlaceType placeType) {
         try {
             RadarSearchRequest radarSearchRequest = PlacesApi.radarSearchQuery(GoogleApi.PLACES.getContext(), localization, radius);
             radarSearchRequest.type(placeType);
             PlacesSearchResponse await = radarSearchRequest.await();
-            return await.results.length;
+            return await.results;
         } catch (Exception e) {
             throw new CannotGetGeoApiException(e);
         }
