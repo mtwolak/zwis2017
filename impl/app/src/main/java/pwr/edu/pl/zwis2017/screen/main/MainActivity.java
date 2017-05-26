@@ -1,9 +1,6 @@
 package pwr.edu.pl.zwis2017.screen.main;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,12 +16,10 @@ import pwr.edu.pl.zwis2017.db.localization.LocalizationManagerDatabase;
 import pwr.edu.pl.zwis2017.db.localization.LocalizationWithCityNamer;
 import pwr.edu.pl.zwis2017.screen.about.AboutActivity;
 import pwr.edu.pl.zwis2017.screen.instruction.InstructionActivity;
-import pwr.edu.pl.zwis2017.screen.maps.selected.MapActivity;
 import pwr.edu.pl.zwis2017.screen.maps.nearby.MapCreator;
 import pwr.edu.pl.zwis2017.screen.options.OptionActivity;
 import pwr.edu.pl.zwis2017.screen.region.intent.RegionIntentCreator;
 import pwr.edu.pl.zwis2017.utils.internet.checker.InternetChecker;
-import pwr.edu.pl.zwis2017.utils.internet.restriction.CasualStartActivityWithInternet;
 import pwr.edu.pl.zwis2017.utils.internet.restriction.StartWithResultActivityWithInternet;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private LocalizationManagerDatabase localizationDatabase;
     private TextView actualLocalizationLbl;
     private EditText enteredLocalizationEditText;
-    public static final String ENTERED_LOCALIZATION = "enteredLocalization";
     private static final String LOCALIZATION_REMEMBERED = "Lokalizacja zapamiętana";
     private static final String LOCALIZATION_CANNOT_BE_REMEMBERED_EXISTS_ALREADY = "Lokalizacja nie może być zapamiętana, ponieważ już istnieje w pamięci";
     private static final LocalizationWithCityNamer LOCALIZATION_WITH_CITY_NAMER = new LocalizationWithCityNamer();
@@ -73,12 +67,6 @@ public class MainActivity extends AppCompatActivity {
                 return createIntentForNearbyPlaces();
             }
         });
-        findViewById(R.id.selectedPlacesMapBtn).setOnClickListener(new CasualStartActivityWithInternet(MainActivity.this, internetChecker) {
-            @Override
-            public Intent createIntent() {
-                return createIntentForSelectedPlaces();
-            }
-        });
         findViewById(R.id.optionsBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,13 +105,6 @@ public class MainActivity extends AppCompatActivity {
         MapCreator mapCreator = new MapCreator();
         mapCreator.setLatLngBounds(mapCreator.getLocationFromAddress(MainActivity.this, getEnteredLocalization().toString()));
         return mapCreator.createIntent(MainActivity.this);
-    }
-
-    @NonNull
-    private Intent createIntentForSelectedPlaces() {
-        Intent intent = new Intent(MainActivity.this, MapActivity.class);
-        intent.putExtra(ENTERED_LOCALIZATION, getPrimaryLocalization());
-        return intent;
     }
 
     @Override
