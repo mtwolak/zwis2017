@@ -21,26 +21,36 @@
         android:text="localization"
         android:textColor="@android:color/holo_blue_bright" />
 
+    <Button
+        android:id="@+id/saveLocalizationBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Zapamiętaj lokalizację"
+        android:layout_below="@+id/actualLocalizationTxt"
+        android:layout_centerHorizontal="true" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/actualLocalizationTxt"
         android:text="Twoja aktualna lokalizacja:"
-        android:textColor="@android:color/background_light" />
+        android:textColor="@android:color/background_light"
+        android:layout_below="@+id/saveLocalizationBtn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/actualLocalizationLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
         android:text="Wybrana lokalizacja"
         android:textColor="@android:color/background_light"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
 
     <TableLayout
         android:layout_width="match_parent"

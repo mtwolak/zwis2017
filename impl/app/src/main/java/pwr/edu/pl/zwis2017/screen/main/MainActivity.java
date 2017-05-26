@@ -61,6 +61,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setButtonsListeners() {
+        findViewById(R.id.saveLocalizationBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rememberLocalization();
+            }
+        });
         findViewById(R.id.nearbyPlacesMapBtn).setOnClickListener(new StartWithResultActivityWithInternet(MainActivity.this, internetChecker, MapCreator.PLACE_PICKER_REQUEST) {
             @Override
             public Intent createIntent() {
@@ -105,24 +111,6 @@ public class MainActivity extends AppCompatActivity {
         MapCreator mapCreator = new MapCreator();
         mapCreator.setLatLngBounds(mapCreator.getLocationFromAddress(MainActivity.this, getEnteredLocalization().toString()));
         return mapCreator.createIntent(MainActivity.this);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.activity_main_actions, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.rememberLocalication:
-                rememberLocalization();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     private void rememberLocalization() {
